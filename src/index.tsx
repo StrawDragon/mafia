@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import App from './App';
+import GameCard from './game_card';
 import 'antd/dist/antd.css';
 
 ReactDOM.render(
-  <App />,
+  <GameCard />,
   document.getElementById('root') as HTMLElement
 );

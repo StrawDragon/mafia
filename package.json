@@ -18,11 +18,12 @@
   "homepage": "https://github.com/StrawDragon/mafia#readme",
   "private": true,
   "dependencies": {
+    "@types/antd": "^1.0.0",
     "@types/jest": "^21.1.8",
     "@types/node": "^8.0.53",
     "@types/react": "^16.0.25",
     "@types/react-dom": "^16.0.3",
-    "antd": "^2.13.11",
+    "antd": "^3.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-scripts-ts": "2.8.0"
@@ -32,8 +33,5 @@
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject"
-  },
-  "devDependencies": {
-    "@types/antd": "^1.0.0"
   }
 }
