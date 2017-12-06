@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PlayerList from './player_list';
+import Voting from './voting';
 
 const players = [
   {
@@ -25,7 +26,7 @@ class GameCard extends React.Component {
         <h1>Карточка игры</h1>
         <div>Управление процесом, этап игры, таймер - (Managment)</div>
         <PlayerList players={players} />
-        <div>Голосование</div>
+        <Voting />
         <div>Темные делишки</div>
       </div>
     );
