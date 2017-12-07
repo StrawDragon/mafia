@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Row, Col } from 'antd';
 import Player from '../types/player';
 import PlayerCard from '../player_card';
 
@@ -10,20 +9,13 @@ interface Props {
 }
 
 class PlayerList extends React.Component<Props> {
-  renderPlayerCard(index: number, player: Player) {
-    return (
-      <PlayerCard
-        key={index}
-        value={player}
-        number={index + 1}
-      />
-    );
-  }
-  renderPlayerCards(players: Array<Player>, indexBase: number) {
+  renderPlayerCards(players: Array<Player>) {
     return players.map((player, index) => (
-      <Col lg={4} xl={2}>
-        {this.renderPlayerCard(index + indexBase, player)}
-      </Col>
+        <PlayerCard
+            key={index}
+            value={player}
+            number={index + 1}
+        />
     ));
   }
 
@@ -33,16 +25,11 @@ class PlayerList extends React.Component<Props> {
     return (
       <div>
         <h4>
-          Список игроков 2
+          Список игроков
         </h4>
-        <Row>
-          <Col lg={2} xl={2}></Col>
-          {this.renderPlayerCards(players.slice(0, 5), 0)}
-          <Col lg={2} xl={0}></Col>
-          <Col lg={2} xl={0}></Col>
-          {this.renderPlayerCards(players.slice(5), 5)}
-          <Col lg={2} xl={2}></Col>
-        </Row>
+        <div className="game_card--player_list--list">
+          {this.renderPlayerCards(players)}
+        </div>
       </div>
     );
   }

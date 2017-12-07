@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Player from '../types/player';
-import { Card, Avatar } from 'antd';
+import { Card, Avatar, Icon } from 'antd';
 
 const { Meta } = Card as any;
 
@@ -25,10 +25,12 @@ class PlayerCard extends React.Component<Props> {
     console.log(Card, Meta);
 
     return (
-      <Card>
+      <Card
+        actions={[<Icon type="dislike" />, <Icon type="edit" />, <Icon type="delete" />]}
+      >
         <Meta
           avatar={<Avatar src={value.avatar} />}
-          title={'Игрок №' + playerNumber}
+          title={'Игрок ' + playerNumber}
           description={this.renderDescription(value)}
         />
       </Card>

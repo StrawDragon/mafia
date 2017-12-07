@@ -1,0 +1,23 @@
+@media screen and (min-width:1536px) {
+    .game_card--player_list--list{
+        display:grid;
+        grid-template-columns:  repeat(10, 1fr);
+        grid-gap: 4px;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:1535px) {
+    .game_card--player_list--list{
+        display:grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: 4px;
+    }
+}
+
+@media screen and (min-width:318px) and (max-width:767px) {
+    .game_card--player_list--list{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 4px;
+    }
+}
