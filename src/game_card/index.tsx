@@ -83,7 +83,7 @@ class GameCard extends React.Component {
           <h1>Карточка игры</h1>
         </Row>
         <Row>
-            <h4>Управление процесом, этап игры, таймер - (Managment)</h4>
+            <h2>Управление процесом, этап игры, таймер - (Managment)</h2>
         </Row>
         <PlayerList players={players} />
         <div>Голосование</div>

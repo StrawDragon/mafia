@@ -24,9 +24,9 @@ class PlayerList extends React.Component<Props> {
 
     return (
       <div>
-        <h4>
+        <h3>
           Список игроков
-        </h4>
+        </h3>
         <div className="game_card--player_list--list">
           {this.renderPlayerCards(players)}
         </div>

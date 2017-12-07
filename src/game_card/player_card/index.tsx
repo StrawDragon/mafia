@@ -2,6 +2,8 @@ import * as React from 'react';
 import Player from '../types/player';
 import { Card, Avatar, Icon } from 'antd';
 
+import './style.css';
+
 const { Meta } = Card as any;
 
 interface Props {
@@ -14,8 +16,8 @@ class PlayerCard extends React.Component<Props> {
     return (
       <div>
         <p>{`Ник: ${value.nickname}`}</p>
-        <p>{value.isDead ? 'Мертв' : 'Жив'}</p>
-        <p>{`Замечания: ${value.warningCount}`}</p>
+        {/* <p>{value.isDead ? 'Мертв' : 'Жив'}</p>
+        <p>{`Замечания: ${value.warningCount}`}</p> */}
       </div>
     );
   }
@@ -26,13 +28,20 @@ class PlayerCard extends React.Component<Props> {
 
     return (
       <Card
+        className="game_card--player_list--card"
         actions={[<Icon type="dislike" />, <Icon type="edit" />, <Icon type="delete" />]}
       >
-        <Meta
-          avatar={<Avatar src={value.avatar} />}
-          title={'Игрок ' + playerNumber}
-          description={this.renderDescription(value)}
-        />
+        <div className="game_card--player_list--number">
+          {playerNumber}
+        </div>
+        <div>
+          <Avatar src={value.avatar} />
+        </div>
+        <div>
+          <h4>
+            {value.nickname}
+          </h4>
+        </div>
       </Card>
     );
   }

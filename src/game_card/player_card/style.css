@@ -1,0 +1,11 @@
+.game_card--player_list--card {
+  max-width: 200px;
+}
+
+.game_card--player_list--number {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  font-size: 18px;
+  font-weight: 800;
+}
