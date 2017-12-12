@@ -1,0 +1,27 @@
+.game_card--voting--vote {
+  width: 90px;
+  cursor: pointer;
+}
+
+.game_card--voting--vote--body {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 24px;
+}
+
+.game_card--voting--vote--nickname {
+  font-size: 11px;
+  margin: 5px;
+}
+
+.game_card--voting--vote--number {
+  position: absolute;
+  top: -8px;
+  left: 2px;
+  font-weight: 800;
+  font-style: italic;
+}

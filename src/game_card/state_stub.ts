@@ -36,7 +36,7 @@ const stub: GameCardState = {
     {
       id: 'pl3',
       numberAtTable: 2,
-      nickname: 'Джокер',
+      nickname: 'ДжокерLheujq',
       avatar: 'https://images.stopgame.ru/uploads/avatars/c64x64/cPWIqei9T4-17K5J-UMpnQ/avatar_284274.jpg',
       deathDayNumber: undefined,
       warningCount: 0,

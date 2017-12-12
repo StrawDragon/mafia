@@ -8,6 +8,7 @@ import sortPlayersByNumberAtTable from '../utils/sort_players_by_number_at_table
 import isDeadPlayer from '../utils/is_dead_player';
 import selectVotesByVoting from '../selectors/select_votes_by_voting';
 import Vote from './vote';
+import './voting_for_player.css';
 
 interface Props {
   votes: Array<VoteType>;
@@ -25,10 +26,11 @@ const VotingForPlayerComponent = (props: Props) => {
   const { votes, players, stage } = props;
 
   return (
-    <div>
+    <div className="game_card--voting--voting_for_player">
       {
         sortPlayersByNumberAtTable(players).map(player =>
           <Vote
+            className="game_card--voting--voting_for_player--vote"
             key={player.id}
             avatar={player.avatar}
             nickname={player.nickname}

@@ -30,7 +30,7 @@ class VotingComponent extends React.Component<Props> {
     const { dayCount } = this.props;
 
     return (
-      <Tabs defaultActiveKey="0" size="small" tabPosition="left">
+      <Tabs defaultActiveKey="0" size="small" tabPosition="top">
         {this.renderDays(dayCount)}
       </Tabs>
     );

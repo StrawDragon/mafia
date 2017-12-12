@@ -17,7 +17,7 @@ const sortVotingsByOrder = (votings: Array<Voting>) => votings.sort(compareByOrd
 class DayVotingComponent extends React.Component<Props> {
   renderVoting = (voting: Voting, player: Player) => {
     return (
-      <div>
+      <div key={voting.id}>
         <span>
           {player.nickname}
         </span>
@@ -36,12 +36,9 @@ class DayVotingComponent extends React.Component<Props> {
 
   render() {
     const { votings, players } = this.props;
-    console.log(votings, players)
+
     return (
       <div>
-        <span>
-          Голосование
-        </span>
         {this.renderVotings(votings, players)}
       </div>
     );
