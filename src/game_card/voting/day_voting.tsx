@@ -36,7 +36,7 @@ class DayVotingComponent extends React.Component<Props> {
 
   render() {
     const { votings, players } = this.props;
-    
+    console.log(votings, players)
     return (
       <div>
         <span>

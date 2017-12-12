@@ -1,10 +1,19 @@
 import { GameCardState } from './reducer';
 import PlayerRole from './types/player_role';
+import VotingType from './types/voting_type';
 
 const stub: GameCardState = {
   stage: 0,
   votes: [],
-  votings: [],
+  votings: [
+    {
+      id: 'vi1',
+      order: 0,
+      type: VotingType.Normal,
+      dayNumber: 0,
+      playerID: 'pl1',
+    }
+  ],
   players: [
     {
       id: 'pl1',

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PlayerList from './player_list';
-import Voting from './voting';
+import VotingComponent from './voting';
 
 class GameCard extends React.Component {
   render() {
@@ -9,7 +9,7 @@ class GameCard extends React.Component {
         <h1>Карточка игры</h1>
         <div>Управление процесом, этап игры, таймер - (Managment)</div>
         <PlayerList players={[]} />
-        <Voting />
+        <VotingComponent />
         <div>Темные делишки</div>
       </div>
     );
