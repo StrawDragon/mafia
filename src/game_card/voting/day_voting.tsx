@@ -1,11 +1,14 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Collapse } from 'antd';
 import { RootState } from '../../common/reducer/root';
 import Voting from '../types/voting';
 import Player from '../types/player';
 import VotingForPlayer from './voting_for_player';
 import selectNormalDayVotings from '../selectors/select_normal_day_votings';
 import './day_voting.css';
+
+const Panel = Collapse.Panel;
 
 interface Props {
   votings: Array<Voting>;
@@ -18,12 +21,9 @@ const sortVotingsByOrder = (votings: Array<Voting>) => votings.sort(compareByOrd
 class DayVotingComponent extends React.Component<Props> {
   renderVoting = (voting: Voting, player: Player) => {
     return (
-      <div key={voting.id}>
-        <h3 className="game_card--voting--day_voting--header">
-          Изгнать игрока № {player.numberAtTable + 1} ({player.nickname})
-        </h3>
+      <Panel header={`Изгнать игрока № ${player.numberAtTable + 1} (${player.nickname})`} key={voting.id}>
         <VotingForPlayer voting={voting}/>
-      </div>
+      </Panel>
     );
   }
   renderVotings = (votings: Array<Voting>, players: Array<Player>) => {
@@ -39,9 +39,9 @@ class DayVotingComponent extends React.Component<Props> {
     const { votings, players } = this.props;
 
     return (
-      <div>
+      <Collapse accordion={true}>
         {this.renderVotings(votings, players)}
-      </div>
+      </Collapse>
     );
   }
 }
