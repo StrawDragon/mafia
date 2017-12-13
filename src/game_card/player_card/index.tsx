@@ -16,15 +16,13 @@ class PlayerCard extends React.Component<Props> {
     return (
       <div>
         <p>{`Ник: ${value.nickname}`}</p>
-        {/* <p>{value.isDead ? 'Мертв' : 'Жив'}</p>
-        <p>{`Замечания: ${value.warningCount}`}</p> */}
+        <p>{`Замечания: ${value.warningCount}`}</p>
       </div>
     );
   }
 
   render() {
     const { value, number: playerNumber } = this.props;
-    console.log(Card, Meta);
 
     return (
       <Card

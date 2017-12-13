@@ -1,7 +1,11 @@
+import PlayerRole from './player_role';
+
 export default interface Player {
   id: string;
-  avatar: string;
+  numberAtTable: number;
   nickname: string;
-  isDead: boolean;
+  avatar: string;
+  deathDayNumber?: number;
   warningCount: number;
-};
+  role: PlayerRole;
+}
