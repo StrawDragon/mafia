@@ -7,4 +7,4 @@ export interface SimpleAction {
   type: string;
 }
 
-export type Action<P> = ChargedAction<P> | SimpleAction;
+export type Action<P> = ChargedAction<P> & SimpleAction;
