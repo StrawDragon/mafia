@@ -9,6 +9,7 @@ import sortPlayersByNumberAtTable from '../utils/sort_players_by_number_at_table
 import isDeadPlayer from '../utils/is_dead_player';
 import dayNumber from '../utils/day_number';
 import selectVotesByVoting from '../selectors/select_votes_by_voting';
+import selectPrevDayVotes from '../selectors/select_prev_day_votes';
 import Vote from './vote';
 import * as Actions from '../actions';
 import './voting_for_player.css';
@@ -39,10 +40,12 @@ class VotingForPlayerComponent extends React.Component<Props> {
     }
   }
 
-  renderPlayerVote = (player: Player, votes: Array<VoteType>, stage: number, voting: Voting, prevVotings: Array<Voting>) => {
+  renderPlayerVote = (player: Player, votes: Array<VoteType>, stage: number, voting: Voting, prevVotes: Array<VoteType>) => {
     const vote = getVote(player, votes);
     const value = !!vote;
-    const disabled = dayNumber(stage) > voting.dayNumber || isDeadPlayer(player, stage) || prevVotings.;
+    const disabled = dayNumber(stage) > voting.dayNumber 
+      || isDeadPlayer(player, stage) 
+      || !!prevVotes.find(v => v.playerID === player.id);
 
     return (
       <Vote
@@ -77,7 +80,7 @@ interface OuterProps {
 
 const VotingForPlayer = connect(
   (state: RootState, outerProps: OuterProps) => ({
-    prevVotes: ,
+    prevVotes: selectPrevDayVotes(state, outerProps.voting),
     voting: outerProps.voting,
     votes: selectVotesByVoting(state, outerProps.voting),
     players: state.gameCard.players,
