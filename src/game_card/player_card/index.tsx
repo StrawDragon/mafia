@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Player from '../types/player';
-import { Card, Avatar } from 'antd';
+import { Card, Avatar, Icon } from 'antd';
 
-const { Meta } = Card as any;
+import './style.css';
 
 interface Props {
   value: Player;
@@ -23,12 +23,21 @@ class PlayerCard extends React.Component<Props> {
     const { value, number: playerNumber } = this.props;
 
     return (
-      <Card>
-        <Meta
-          avatar={<Avatar src={value.avatar} />}
-          title={'Игрок №' + playerNumber}
-          description={this.renderDescription(value)}
-        />
+      <Card
+        className="game_card--player_list--card"
+        actions={[<Icon type="dislike" />, <Icon type="edit" />, <Icon type="delete" />]}
+      >
+        <div className="game_card--player_list--number">
+          {playerNumber}
+        </div>
+        <div>
+          <Avatar src={value.avatar} />
+        </div>
+        <div>
+          <h4>
+            {value.nickname}
+          </h4>
+        </div>
       </Card>
     );
   }

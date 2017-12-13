@@ -1,0 +1,25 @@
+@media screen and (min-width:1600px) {
+    .game_card--player_list--list{
+        display:grid;
+        grid-template-columns:  repeat(10, 1fr);
+        grid-gap: 10px;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:1599px) {
+    .game_card--player_list--list{
+        display:grid;
+        justify-content: space-around;
+        align-content: center;
+        grid-template-columns: repeat(5, 200px);
+        grid-gap: 5px;
+    }
+}
+
+@media screen and (min-width:318px) and (max-width:767px) {
+    .game_card--player_list--list{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
