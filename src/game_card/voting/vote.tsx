@@ -4,34 +4,45 @@ import './vote.css';
 
 interface Props {
   className?: string;
+  value: boolean;
   avatar: string;
   nickname: string;
   numberAtTable: number;
-  value: boolean;
   disabled?: boolean;
+  onClick?: () => void;
 }
 
-const Vote = (props: Props) => {
-  const { avatar, nickname, value, className, numberAtTable } = props;
+class Vote extends React.Component<Props> {
 
-  return (
-    <Card className={`game_card--voting--vote ${className}`}>
-      <div className="game_card--voting--vote--body">
-        <span className="game_card--voting--vote--number">{numberAtTable + 1}</span>
-        <Avatar src={avatar} size="large" shape="square"/>
-        <span className="game_card--voting--vote--nickname">{nickname}</span>
-        <div className="game_card--voting--vote--value">
-        {
-          value ? (
-            <Icon type="like" /> 
-          ) : (
-            <Icon type="like-o" style={{opacity: 0.3}}/>
-          )
-        }
+  clickHandler = () => {
+    if (this.props.onClick && !this.props.disabled) {
+      this.props.onClick();
+    }
+  }
+
+  render() {
+    const { avatar, nickname, disabled, value, className, numberAtTable } = this.props;
+    const disableModify = disabled ? 'game_card--voting--vote__disabled' : '';
+
+    return (
+      <Card className={`game_card--voting--vote ${disableModify} ${className}`}>
+        <div className="game_card--voting--vote--body" onClick={this.clickHandler}>
+          <span className="game_card--voting--vote--number">{numberAtTable + 1}</span>
+          <Avatar src={avatar} size="large" shape="square"/>
+          <span className="game_card--voting--vote--nickname">{nickname}</span>
+          <div className="game_card--voting--vote--value">
+          {
+            value ? (
+              <Icon type="like" /> 
+            ) : (
+              <Icon type="like-o" style={{opacity: 0.3}}/>
+            )
+          }
+          </div>
         </div>
-      </div>
-    </Card>
-  );
-};
+      </Card>
+    );
+  }
+}
 
 export default Vote;

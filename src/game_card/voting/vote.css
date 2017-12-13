@@ -30,3 +30,7 @@
 .game_card--voting--vote--value {
   font-size: 30px;
 }
+
+.game_card--voting--vote__disabled {
+  background-color: #ccc!important;
+}

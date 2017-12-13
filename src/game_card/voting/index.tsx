@@ -21,7 +21,7 @@ class VotingComponent extends React.Component<Props> {
   }
 
   renderDays = (dayCount: number) => {
-    const dayNumbers = Array.from(Array(dayCount).keys());
+    const dayNumbers = Array.from(Array(dayCount).keys()); // [0, 1, 2, 3, 4 ... dayCount - 1]
 
     return dayNumbers.map(dayNumber => this.renderDay(dayNumber));
   }

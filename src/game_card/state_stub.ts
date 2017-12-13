@@ -3,14 +3,18 @@ import PlayerRole from './types/player_role';
 import VotingType from './types/voting_type';
 
 const stub: GameCardState = {
-  stage: 0,
+  stage: 2,
+  currentVotingID: 'vi4',
   votes: [
     {
-      id: 'v0',
+      id: 'v1',
       votingID: 'vi0',
-      fromPlayerID: 'pl0',
-      toPlayerID: 'pl1',
-      value: true,
+      playerID: 'pl0',
+    },
+    {
+      id: 'v1',
+      votingID: 'vi3',
+      playerID: 'pl0',
     },
   ],
   votings: [
@@ -27,6 +31,20 @@ const stub: GameCardState = {
       type: VotingType.Normal,
       dayNumber: 0,
       playerID: 'pl2',
+    },
+    {
+      id: 'vi3',
+      order: 2,
+      type: VotingType.Normal,
+      dayNumber: 1,
+      playerID: 'pl5',
+    },
+    {
+      id: 'vi4',
+      order: 3,
+      type: VotingType.Normal,
+      dayNumber: 1,
+      playerID: 'pl9',
     },
   ],
   players: [
@@ -62,7 +80,7 @@ const stub: GameCardState = {
       numberAtTable: 3,
       nickname: 'Джокер',
       avatar: 'https://images.stopgame.ru/uploads/avatars/c64x64/cPWIqei9T4-17K5J-UMpnQ/avatar_284274.jpg',
-      deathDayNumber: undefined,
+      deathDayNumber: 1,
       warningCount: 0,
       role: PlayerRole.Mafia,
     },
