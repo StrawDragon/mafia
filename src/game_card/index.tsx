@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Row } from 'antd';
 import PlayerList from './player_list';
 
 class GameCard extends React.Component {

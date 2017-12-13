@@ -4,8 +4,6 @@ import { Card, Avatar, Icon } from 'antd';
 
 import './style.css';
 
-const { Meta } = Card as any;
-
 interface Props {
   value: Player;
   number: number;
