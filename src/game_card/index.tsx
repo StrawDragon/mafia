@@ -7,7 +7,7 @@ class GameCard extends React.Component {
       <div className="align-center">
         <h1>Карточка игры</h1>
         <div>Управление процесом, этап игры, таймер - (Managment)</div>
-        <PlayerList players={[]} />
+        <PlayerList />
         <div>Голосование</div>
         <div>Темные делишки</div>
       </div>

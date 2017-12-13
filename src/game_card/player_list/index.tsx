@@ -1,6 +1,8 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import Player from '../types/player';
 import PlayerCard from '../player_card';
+import { RootState } from '../../common/reducer/root';
 
 import './style.css';
 
@@ -35,4 +37,10 @@ class PlayerList extends React.Component<Props> {
   }
 }
 
-export default PlayerList;
+const mapStateToProps = (state: RootState) => ({
+  players: state.gameCard.players
+});
+
+export default connect(
+  mapStateToProps
+)(PlayerList);
