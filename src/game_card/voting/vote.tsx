@@ -18,15 +18,17 @@ const Vote = (props: Props) => {
     <Card className={`game_card--voting--vote ${className}`}>
       <div className="game_card--voting--vote--body">
         <span className="game_card--voting--vote--number">{numberAtTable + 1}</span>
-        <Avatar src={avatar} size="small" />
+        <Avatar src={avatar} size="large" shape="square"/>
         <span className="game_card--voting--vote--nickname">{nickname}</span>
+        <div className="game_card--voting--vote--value">
         {
           value ? (
             <Icon type="like" /> 
           ) : (
-            <Icon type="dislike-o" />
+            <Icon type="like-o" style={{opacity: 0.3}}/>
           )
         }
+        </div>
       </div>
     </Card>
   );

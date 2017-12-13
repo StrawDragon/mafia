@@ -5,6 +5,7 @@ import Voting from '../types/voting';
 import Player from '../types/player';
 import VotingForPlayer from './voting_for_player';
 import selectNormalDayVotings from '../selectors/select_normal_day_votings';
+import './day_voting.css';
 
 interface Props {
   votings: Array<Voting>;
@@ -18,9 +19,9 @@ class DayVotingComponent extends React.Component<Props> {
   renderVoting = (voting: Voting, player: Player) => {
     return (
       <div key={voting.id}>
-        <span>
-          {player.nickname}
-        </span>
+        <h3 className="game_card--voting--day_voting--header">
+          Изгнать игрока № {player.numberAtTable + 1} ({player.nickname})
+        </h3>
         <VotingForPlayer voting={voting}/>
       </div>
     );
