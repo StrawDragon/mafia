@@ -4,7 +4,7 @@ import Player from '../types/player';
 import PlayerCard from '../player_card';
 import { RootState } from '../../common/reducer/root';
 
-import './style.css';
+import * as styles from './style.css';
 
 interface Props {
   players: Array<Player>;
@@ -29,7 +29,7 @@ class PlayerList extends React.Component<Props> {
         <h3>
           Список игроков
         </h3>
-        <div className="game_card--player_list--list">
+        <div className={styles.list}>
           {this.renderPlayerCards(players)}
         </div>
       </div>

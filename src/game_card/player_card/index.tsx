@@ -2,7 +2,7 @@ import * as React from 'react';
 import Player from '../types/player';
 import { Card, Avatar, Icon } from 'antd';
 
-import './style.css';
+import * as styles from './style.css';
 
 interface Props {
   value: Player;
@@ -21,13 +21,14 @@ class PlayerCard extends React.Component<Props> {
 
   render() {
     const { value, number: playerNumber } = this.props;
+    const { card, number } = styles;
 
     return (
       <Card
-        className="game_card--player_list--card"
+        className={card}
         actions={[<Icon type="dislike" />, <Icon type="edit" />, <Icon type="delete" />]}
       >
-        <div className="game_card--player_list--number">
+        <div className={number}>
           {playerNumber}
         </div>
         <div>
