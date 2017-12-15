@@ -7,7 +7,6 @@ import Player from '../types/player';
 import currentDayNumber from '../utils/day_number';
 import VotingForPlayer from './voting_for_player';
 import selectNormalDayVotings from '../selectors/select_normal_day_votings';
-import './day_voting.css';
 
 const Panel = Collapse.Panel;
 

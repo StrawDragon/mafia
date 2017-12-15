@@ -1,36 +1,36 @@
-.game_card--voting--vote {
+.vote {
   width: 90px;
   cursor: pointer;
-}
 
-.game_card--voting--vote--body {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
+  .body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
-.game_card--voting--vote--nickname {
-  font-size: 11px;
-  margin: 5px;
-  text-align: center;
-}
+  .nickname {
+    font-size: 11px;
+    margin: 5px;
+    text-align: center;
+  }
 
-.game_card--voting--vote--number {
-  position: absolute;
-  top: -6px;
-  left: 2px;
-  font-weight: 800;
-  font-style: italic;
-  font-size: 24px;
-}
+  .number {
+    position: absolute;
+    top: -6px;
+    left: 2px;
+    font-weight: 800;
+    font-style: italic;
+    font-size: 24px;
+  }
 
-.game_card--voting--vote--value {
-  font-size: 30px;
-}
+  .value {
+    font-size: 30px;
+  }
 
-.game_card--voting--vote__disabled {
-  background-color: #ccc!important;
+  .disabled {
+    background-color: #ccc!important;
+  }
 }
