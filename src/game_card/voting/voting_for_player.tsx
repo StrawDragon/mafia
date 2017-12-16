@@ -12,7 +12,7 @@ import selectVotesByVoting from '../selectors/select_votes_by_voting';
 import selectPrevDayVotes from '../selectors/select_prev_day_votes';
 import Vote from './vote';
 import * as Actions from '../actions';
-import './voting_for_player.css';
+import * as styles from  './voting_for_player.css';
 // TODO: обновить диагарму
 interface Props {
   prevVotes: Array<VoteType>;
@@ -49,7 +49,7 @@ class VotingForPlayerComponent extends React.Component<Props> {
 
     return (
       <Vote
-        className="game_card--voting--voting_for_player--vote"
+        className={styles.vote}
         key={player.id}
         avatar={player.avatar}
         nickname={player.nickname}
@@ -65,7 +65,7 @@ class VotingForPlayerComponent extends React.Component<Props> {
     const { votes, players, stage, voting, prevVotes } = this.props;
 
     return (
-      <div className="game_card--voting--voting_for_player">
+      <div className={styles.voting_for_player}>
         {
           sortPlayersByNumberAtTable(players).map(player => this.renderPlayerVote(player, votes, stage, voting, prevVotes))
         }

@@ -123,8 +123,8 @@ const stub: GameCardState = {
     {
       id: 'pl8',
       numberAtTable: 8,
-      nickname: 'Джокер',
-      avatar: 'https://images.stopgame.ru/uploads/avatars/c64x64/cPWIqei9T4-17K5J-UMpnQ/avatar_284274.jpg',
+      nickname: 'Бегемот',
+      avatar: 'http://ic.pics.livejournal.com/globolife/59791984/424722/424722_original.jpg',
       deathDayNumber: undefined,
       warningCount: 0,
       role: PlayerRole.Citizen,
@@ -132,8 +132,8 @@ const stub: GameCardState = {
     {
       id: 'pl9',
       numberAtTable: 9,
-      nickname: 'Джокер',
-      avatar: 'https://images.stopgame.ru/uploads/avatars/c64x64/cPWIqei9T4-17K5J-UMpnQ/avatar_284274.jpg',
+      nickname: 'Помидор',
+      avatar: 'https://proshkolu.ru/content/media/pic/std/2000000/1352000/1351454-e69254abddc83801.gif',
       deathDayNumber: undefined,
       warningCount: 0,
       role: PlayerRole.Citizen,

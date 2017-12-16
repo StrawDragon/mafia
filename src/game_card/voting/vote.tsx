@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Card, Avatar, Icon } from 'antd';
-import './vote.css';
+import * as styles from './vote.css';
 
 interface Props {
   className?: string;
@@ -22,15 +22,15 @@ class Vote extends React.Component<Props> {
 
   render() {
     const { avatar, nickname, disabled, value, className, numberAtTable } = this.props;
-    const disableModify = disabled ? 'game_card--voting--vote__disabled' : '';
+    const disableModify = disabled ? styles.disabled : '';
 
     return (
-      <Card className={`game_card--voting--vote ${disableModify} ${className}`}>
-        <div className="game_card--voting--vote--body" onClick={this.clickHandler}>
-          <span className="game_card--voting--vote--number">{numberAtTable + 1}</span>
+      <Card className={`${styles.vote} ${disableModify} ${className}`}>
+        <div className={styles.body} onClick={this.clickHandler}>
+          <span className={styles.number}>{numberAtTable + 1}</span>
           <Avatar src={avatar} size="large" shape="square"/>
-          <span className="game_card--voting--vote--nickname">{nickname}</span>
-          <div className="game_card--voting--vote--value">
+          <span className={styles.nickname}>{nickname}</span>
+          <div className={styles.value}>
           {
             value ? (
               <Icon type="like" /> 

@@ -4,6 +4,7 @@
 /node_modules
 .vscode
 .css.d.ts
+.idea
 
 # testing
 /coverage
