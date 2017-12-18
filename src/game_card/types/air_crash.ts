@@ -1,6 +1,5 @@
-export default interface Voting {
+export default interface AirCrash {
   id: string;
-  order: number;
   dayNumber: number;
   playerID: string;
 }

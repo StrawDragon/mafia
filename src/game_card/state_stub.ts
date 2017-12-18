@@ -4,7 +4,7 @@ import VotingType from './types/voting_type';
 
 const stub: GameCardState = {
   stage: 2,
-  currentVotingID: 'vi4',
+
   votes: [
     {
       id: 'v1',
@@ -21,39 +21,36 @@ const stub: GameCardState = {
     {
       id: 'vi0',
       order: 0,
-      type: VotingType.Normal,
       dayNumber: 0,
       playerID: 'pl1',
     },
     {
       id: 'vi1',
       order: 1,
-      type: VotingType.Normal,
       dayNumber: 0,
       playerID: 'pl2',
     },
     {
       id: 'vi3',
       order: 2,
-      type: VotingType.Normal,
       dayNumber: 1,
       playerID: 'pl5',
     },
     {
       id: 'vi4',
       order: 3,
-      type: VotingType.Normal,
       dayNumber: 1,
       playerID: 'pl9',
     },
   ],
+  carCrashes: [],
+  airCrashes: [],
   players: [
     {
       id: 'pl0',
       numberAtTable: 0,
       nickname: 'Корлеоне',
       avatar: 'https://pp.userapi.com/c10133/g32986998/e_aabbbcf8.jpg',
-      deathDayNumber: undefined,
       warningCount: 1,
       role: PlayerRole.Don,
     },
@@ -116,7 +113,6 @@ const stub: GameCardState = {
       numberAtTable: 7,
       nickname: 'Мистр Огурчик',
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIGQ5Yc-aLcBWYVVrooL6I_QyublVOU67ac530HSIY6gpErgF',
-      deathDayNumber: undefined,
       warningCount: 0,
       role: PlayerRole.Citizen,
     },
@@ -125,7 +121,6 @@ const stub: GameCardState = {
       numberAtTable: 8,
       nickname: 'Бегемот',
       avatar: 'http://ic.pics.livejournal.com/globolife/59791984/424722/424722_original.jpg',
-      deathDayNumber: undefined,
       warningCount: 0,
       role: PlayerRole.Citizen,
     },
@@ -134,12 +129,12 @@ const stub: GameCardState = {
       numberAtTable: 9,
       nickname: 'Помидор',
       avatar: 'https://proshkolu.ru/content/media/pic/std/2000000/1352000/1351454-e69254abddc83801.gif',
-      deathDayNumber: undefined,
       warningCount: 0,
       role: PlayerRole.Citizen,
     },
   ],
   sheriffChecks: [],
+  donChecks: [],
   shoots: [],
 };
 
