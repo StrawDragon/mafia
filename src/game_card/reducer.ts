@@ -8,6 +8,7 @@ import SheriffCheck from './types/sheriff_check';
 import DonCheck from './types/don_check';
 import Shoot from './types/shoot';
 import ActionTypes from '../common/constants/actionTypes';
+import StageType from './types/stage_type';
 
 import initialStateStub from './state_stub';
 
@@ -15,7 +16,7 @@ export interface GameCardState {
   day: number;
   lastOpenedDaySpeakerID: string;
   stage: {
-    type: '',
+    type: StageType,
     currentVotingID?: string;
     currentShootingID?: string;
     currentDonCheckingID?: string;
