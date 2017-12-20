@@ -1,11 +1,38 @@
 .card {
   max-width: 200px;
+  position: relative;
+  font-size: 16px;
+  border: 1px solid #afafaf;
+  padding: 5px;
+  box-shadow: 0 0 10px #afafaf;
+}
 
-  .number {
-    position: absolute;
-    top: -4px;
-    left: 0;
-    font-size: 18px;
-    font-weight: 800;
-  }
+.card.small {
+  width: 90px;
+  font-size: 14px;
+}
+
+.card.disabled {
+  opacity: 0.4;
+}
+
+.card__number {
+  position: absolute;
+  top: 0;
+  left: 3px;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.warnings {
+  position: absolute;
+  top: 0;
+  right: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fc0404;
+}
+
+.avatar {
+  padding-left: 22px;
 }

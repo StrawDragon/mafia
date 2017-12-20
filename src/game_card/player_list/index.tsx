@@ -16,7 +16,8 @@ class PlayerList extends React.Component<Props> {
         <PlayerCard
             key={index}
             value={player}
-            number={index + 1}
+            disabled={player.deathDayNumber !== undefined}
+            size="small"
         />
     ));
   }

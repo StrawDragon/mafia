@@ -89,8 +89,8 @@ const stub: GameCardState = {
       numberAtTable: 4,
       nickname: 'Царь',
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhmC9v77KJFkkkh6e4c9VWMVA_ocumZJ_HEFqMwvGFb8mP_A-j',
-      deathDayNumber: undefined,
-      warningCount: 5,
+      deathDayNumber: 1,
+      warningCount: 4,
       role: PlayerRole.Citizen,
     },
     {
