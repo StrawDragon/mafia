@@ -24,6 +24,7 @@ export interface GameCardState {
     currentSpeakerID?: string;
   };
   timerValue: number; // sec
+  isRunTimer: boolean;
   votes: Array<Vote>;
   votings: Array<Voting>;
   carCrashes: Array<CarCrash>;
@@ -53,12 +54,29 @@ const voteAddedReducer = (state: GameCardState, action: ChargedAction<Vote>): Ga
 const voteRemovedReducer = (state: GameCardState, action: ChargedAction<string>): GameCardState => {
   return {...state, votes: state.votes.filter(vote => vote.id !== action.payload)};
 };
+// TIMER_STARTED: 'GameCard -> TIMER_STARTED',
+// TIMER_PAUSED: 'GameCard -> TIMER_PAUSED',
+// TIMER_SET: 'GameCard -> TIMER_SET',
+const timerStartedReducer = (state: GameCardState) => {
+  return {...state, isRunTimer: true };
+};
+
+const timerPausedReducer = (state: GameCardState) => {
+  return {...state, isRunTimer: false };
+};
+
+const timerSetReducer = (state: GameCardState, action: ChargedAction<number>) => {
+  return {...state, timerValue: action.payload };
+};
 
 // tslint:disable-next-line:no-any
 const reducer = (state: GameCardState = initialState, action: Action<any>) => {
   switch (action.type) {
     case ActionTypes.GameCard.VOTE_ADDED: return voteAddedReducer(state, action);
     case ActionTypes.GameCard.VOTE_REMOVED: return voteRemovedReducer(state, action);
+    case ActionTypes.GameCard.TIMER_STARTED: return timerStartedReducer(state);
+    case ActionTypes.GameCard.TIMER_PAUSED: return timerPausedReducer(state);
+    case ActionTypes.GameCard.TIMER_SET: return timerSetReducer(state, action);
     default: return state;
   }
 };
