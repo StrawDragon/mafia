@@ -5,7 +5,7 @@ export default interface Player {
   numberAtTable: number;
   nickname: string;
   avatar: string;
-  deathDayNumber?: number;
+  dayDeathNumber?: number,
   warningCount: number;
   role: PlayerRole;
 }
