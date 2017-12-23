@@ -3,4 +3,6 @@ import 'rxjs';
 import { combineEpics } from 'redux-observable';
 import gameCardEpics from '../../game_card/epic';
 
-export default combineEpics(gameCardEpics);
+export default combineEpics(
+  gameCardEpics,
+);
