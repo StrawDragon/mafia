@@ -113,7 +113,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "C:\\workspace\\mafia\\tsconfig.test.json"
+        "tsConfigFile": "tsconfig.test.json"
       }
     }
   },
