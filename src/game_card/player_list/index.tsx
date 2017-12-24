@@ -17,8 +17,9 @@ class PlayerList extends React.Component<Props> {
             key={index}
             value={player}
             disabled={player.dayDeathNumber !== undefined}
-            //size="small"
-        />
+        >
+          Действия
+        </PlayerCard>
     ));
   }
 

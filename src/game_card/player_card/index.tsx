@@ -7,14 +7,14 @@ import * as styles from './style.css';
 
 interface Props {
   value: Player;
-  disabled?: boolean,
-  size?: 'small' | 'normal' | 'large'
+  disabled?: boolean;
+  size?: 'small' | 'normal' | 'large';
 }
 
 class PlayerCard extends React.Component<Props> {
   renderWarningIcons(count: number) {
-    return Array.from(new Array(count).keys()).map(() => 
-      <div>
+    return Array.from(new Array(count).keys()).map((index) => 
+      <div key={index}>
         <Icon type="warning" />
       </div>
     );
@@ -30,8 +30,8 @@ class PlayerCard extends React.Component<Props> {
   }
 
   render() {
-    const { value, disabled, size } = this.props;
-    const { card, card__number, avatar, warnings } = styles;
+    const { value, disabled, size, children } = this.props;
+    const { card, card__number, avatar, warnings, body } = styles;
     const cardClassNames = getClassNames(card, styles, {
       disabled: disabled,
       small: size === 'small',
@@ -53,6 +53,9 @@ class PlayerCard extends React.Component<Props> {
           <h4>
             {value.nickname}
           </h4>
+          <div className={body}>
+            {children}
+          </div>
         </div>
       </div>
     );
