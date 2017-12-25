@@ -1,15 +1,25 @@
 import * as React from 'react';
 import Player from '../types/player';
-import { Card, Avatar, Icon } from 'antd';
+import getClassNames from '../../common/utils/get_class_names';
+import { Avatar, Icon } from 'antd';
 
 import * as styles from './style.css';
 
 interface Props {
   value: Player;
-  number: number;
+  disabled?: boolean;
+  size?: 'small' | 'normal' | 'large';
 }
 
 class PlayerCard extends React.Component<Props> {
+  renderWarningIcons(count: number) {
+    return Array.from(new Array(count).keys()).map((index) => 
+      <div key={index}>
+        <Icon type="warning" />
+      </div>
+    );
+  }
+
   renderDescription(value: Player) {
     return (
       <div>
@@ -20,26 +30,34 @@ class PlayerCard extends React.Component<Props> {
   }
 
   render() {
-    const { value, number: playerNumber } = this.props;
-    const { card, number } = styles;
+    const { value, disabled, size, children } = this.props;
+    const { card, card__number, avatar, warnings, body } = styles;
+    const cardClassNames = getClassNames(card, styles, {
+      disabled: disabled,
+      small: size === 'small',
+      large: size === 'large'
+    });
 
     return (
-      <Card
-        className={card}
-        actions={[<Icon type="dislike" />, <Icon type="edit" />, <Icon type="delete" />]}
-      >
-        <div className={number}>
-          {playerNumber}
+      <div className={cardClassNames}>
+        <div className={card__number}>
+          {value.numberAtTable + 1}
         </div>
-        <div>
-          <Avatar src={value.avatar} />
+        <div className={avatar}>
+          <Avatar src={value.avatar} shape="square" />
+        </div>
+        <div className={warnings} title="Замечания">
+          {this.renderWarningIcons(value.warningCount)}
         </div>
         <div>
           <h4>
             {value.nickname}
           </h4>
+          <div className={body}>
+            {children}
+          </div>
         </div>
-      </Card>
+      </div>
     );
   }
 }
