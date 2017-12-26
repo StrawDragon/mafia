@@ -8,6 +8,7 @@ import GameCard from './game_card';
 import { Provider } from 'react-redux';
 import store from './common/store';
 import 'antd/dist/antd.css?global';
+import './common/styles/global.css';
 
 ReactDOM.render(
   <Provider store={store}>
