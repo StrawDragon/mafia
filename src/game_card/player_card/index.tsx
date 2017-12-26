@@ -2,16 +2,16 @@ import * as React from 'react';
 import Player from '../types/player';
 import getClassNames from '../../common/utils/get_class_names';
 import { Avatar, Icon } from 'antd';
-
-import * as styles from './style.css';
+import { CardSize } from '../types/card_size';
+import styles from './style.css';
 
 interface Props {
   value: Player;
   disabled?: boolean;
-  size?: 'small' | 'normal' | 'large';
+  size?: CardSize;
 }
 
-class PlayerCard extends React.Component<Props> {
+export class PlayerCard extends React.Component<Props> {
   renderWarningIcons(count: number) {
     return Array.from(new Array(count).keys()).map((index) => 
       <div key={index}>
@@ -44,7 +44,7 @@ class PlayerCard extends React.Component<Props> {
           {value.numberAtTable + 1}
         </div>
         <div className={avatar}>
-          <Avatar src={value.avatar} shape="square" />
+          <Avatar src={value.avatar} shape="square" size={size === 'small' ? undefined : 'large'}/>
         </div>
         <div className={warnings} title="Замечания">
           {this.renderWarningIcons(value.warningCount)}
@@ -61,5 +61,3 @@ class PlayerCard extends React.Component<Props> {
     );
   }
 }
-
-export default PlayerCard;

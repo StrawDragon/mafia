@@ -1,25 +1,30 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import Player from '../types/player';
-import PlayerCard from '../player_card';
+import { PlayerCard } from '../player_card';
 import { RootState } from '../../common/reducer/root';
-
-import * as styles from './style.css';
+import { CardSize } from '../types/card_size';
+import styles from './style.css';
 
 interface Props {
+  cardSize?: CardSize;
   players: Array<Player>;
+  cardContentRenderer: (player: Player) => React.ReactNode;
 }
 
-class PlayerList extends React.Component<Props> {
+class PlayerListComponent extends React.Component<Props> {
   renderPlayerCards(players: Array<Player>) {
     return players.map((player, index) => (
+      <li className={styles.item}>
         <PlayerCard
             key={index}
             value={player}
+            size={this.props.cardSize}
             disabled={player.dayDeathNumber !== undefined}
         >
-          Действия
+          {this.props.cardContentRenderer(player)}
         </PlayerCard>
+      </li>
     ));
   }
 
@@ -27,14 +32,9 @@ class PlayerList extends React.Component<Props> {
     const { players } = this.props;
 
     return (
-      <div>
-        <h3>
-          Список игроков
-        </h3>
-        <div className={styles.list}>
-          {this.renderPlayerCards(players)}
-        </div>
-      </div>
+      <ul className={styles.list}>
+        {this.renderPlayerCards(players)}
+      </ul>
     );
   }
 }
@@ -43,6 +43,6 @@ const mapStateToProps = (state: RootState) => ({
   players: state.gameCard.players
 });
 
-export default connect(
+export const PlayerList = connect(
   mapStateToProps
-)(PlayerList);
+)(PlayerListComponent);

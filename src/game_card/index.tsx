@@ -4,6 +4,7 @@ import { LayoutRoot } from '../common/components/layout/root';
 import { LayoutContent } from '../common/components/layout/content';
 import { LayoutBody } from '../common/components/layout/body';
 import { LayoutHeader } from '../common/components/layout/header';
+import { CardDistribution } from './card_distribution';
 
 class GameCard extends React.Component {
   render() {
@@ -14,7 +15,7 @@ class GameCard extends React.Component {
         </LayoutHeader>
         <LayoutBody>
           <LayoutContent>
-            {'body'}
+            <CardDistribution />
           </LayoutContent>
         </LayoutBody>
       </LayoutRoot>
