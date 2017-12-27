@@ -23,8 +23,9 @@ export interface GameCardState {
     currentSheriffCheckingID?: string;
     currentSpeakerID?: string;
   };
-  timerValue: number; // sec
+  currentTimerValue: number; // sec
   isRunTimer: boolean;
+  initialTimerValue: number;
   votes: Array<Vote>;
   votings: Array<Voting>;
   carCrashes: Array<CarCrash>;
@@ -57,26 +58,31 @@ const voteRemovedReducer = (state: GameCardState, action: ChargedAction<string>)
 // TIMER_STARTED: 'GameCard -> TIMER_STARTED',
 // TIMER_PAUSED: 'GameCard -> TIMER_PAUSED',
 // TIMER_SET: 'GameCard -> TIMER_SET',
-const timerStartedReducer = (state: GameCardState) => {
+const timerStartedReducer = (state: GameCardState): GameCardState => {
   return {...state, isRunTimer: true };
 };
 
-const timerPausedReducer = (state: GameCardState) => {
+const timerPausedReducer = (state: GameCardState): GameCardState => {
   return {...state, isRunTimer: false };
 };
 
-const timerSetReducer = (state: GameCardState, action: ChargedAction<number>) => {
-  return {...state, timerValue: action.payload };
+const currentTimerSetReducer = (state: GameCardState, action: ChargedAction<number>): GameCardState => {
+  return {...state, currentTimerValue: action.payload };
+};
+
+const initialTimerSetReducer = (state: GameCardState, action: ChargedAction<number>): GameCardState => {
+  return {...state, initialTimerValue: action.payload };
 };
 
 // tslint:disable-next-line:no-any
-const reducer = (state: GameCardState = initialState, action: Action<any>) => {
+const reducer = (state: GameCardState = initialState, action: Action<any>): GameCardState => {
   switch (action.type) {
     case ActionTypes.GameCard.VOTE_ADDED: return voteAddedReducer(state, action);
     case ActionTypes.GameCard.VOTE_REMOVED: return voteRemovedReducer(state, action);
     case ActionTypes.GameCard.TIMER_STARTED: return timerStartedReducer(state);
     case ActionTypes.GameCard.TIMER_PAUSED: return timerPausedReducer(state);
-    case ActionTypes.GameCard.TIMER_SET: return timerSetReducer(state, action);
+    case ActionTypes.GameCard.TIMER_SET: return currentTimerSetReducer(state, action);
+    case ActionTypes.GameCard.TIMER_INITIAL_SET: return initialTimerSetReducer(state, action);
     default: return state;
   }
 };

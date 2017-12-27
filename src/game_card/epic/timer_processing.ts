@@ -10,7 +10,7 @@ export const timerProcessing = (
   halfTime: number,
 ) => () => {
   const state = store.getState();
-  const newTimerValue = state.gameCard.timerValue - 1;
+  const newTimerValue = state.gameCard.currentTimerValue - 1;
 
   if (newTimerValue === halfTime) {
     pipSound.play({ duration: 1 });
@@ -24,6 +24,6 @@ export const timerProcessing = (
       pipSound.play({ duration: 0.75 });
     }
 
-    return Actions.setTimer(newTimerValue);
+    return Actions.setCurrentTimer(newTimerValue);
   }
 };

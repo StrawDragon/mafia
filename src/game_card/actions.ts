@@ -20,7 +20,12 @@ export const pauseTimer = (): SimpleAction => ({
   type: ActionTypes.GameCard.TIMER_PAUSED,
 });
 
-export const setTimer = (timerValue: number): ChargedAction<number> => ({
+export const setCurrentTimer = (timerValue: number): ChargedAction<number> => ({
   type: ActionTypes.GameCard.TIMER_SET,
   payload: timerValue,
+});
+
+export const setInitialTimer = (initialTimerValue: number): ChargedAction<number> => ({
+  type: ActionTypes.GameCard.TIMER_INITIAL_SET,
+  payload: initialTimerValue,
 });
