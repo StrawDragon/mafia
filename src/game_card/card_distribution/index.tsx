@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import Player from '../types/player';
 import PlayerRole from '../types/player_role';
 import { PlayerList } from '../player_list';
@@ -10,17 +11,17 @@ const RadioGroup = Radio.Group;
 const eventToRadioRole = (e: React.ChangeEvent<HTMLInputElement>): PlayerRole => (e.target.value as any);
 
 interface Props {
-  onChangePlayer: (player: Player) => void;
+  onChangePlayerRole: (playerID: string, newPlayerType: PlayerRole) => void;
 }
 
-export class CardDistribution extends React.Component<Props> {
+class CardDistributionComponent extends React.Component<Props> {
   roleChangeHandler = (role: PlayerRole, player: Player) => {
-    const { onChangePlayer } = this.props;
-    if (onChangePlayer) {
+    const { onChangePlayerRole } = this.props;
+    if (onChangePlayerRole) {
       if (player.role === role) {
-        onChangePlayer({...player, role: PlayerRole.Citizen});
+        onChangePlayerRole(player.id, PlayerRole.Citizen);
       } else {
-        onChangePlayer({...player, role});
+        onChangePlayerRole(player.id, role);
       }
     }
   }
@@ -47,3 +48,10 @@ export class CardDistribution extends React.Component<Props> {
     );
   }
 }
+
+export const CardDistribution = connect(
+  () => ({}),
+  (dispatch) => ({
+    onChangePlayerRole: (playerID: string, newPlayerType: PlayerRole) => {},
+  }),
+)(CardDistributionComponent);

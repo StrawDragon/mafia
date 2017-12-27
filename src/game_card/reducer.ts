@@ -4,6 +4,7 @@ import Voting from './types/voting';
 import CarCrash from './types/car_crash';
 import AirCrash from './types/air_crash';
 import Player from './types/player';
+import PlayerRole from './types/player_role';
 import SheriffCheck from './types/sheriff_check';
 import DonCheck from './types/don_check';
 import Shoot from './types/shoot';
@@ -34,15 +35,6 @@ export interface GameCardState {
   shoots: Array<Shoot>;
 }
 
-// const initialState: GameCardState = {
-//   stage: 0,
-//   votes: [],
-//   votings: [],
-//   players: [],
-//   sheriffChecks: [],
-//   shoots: [],
-// };
-
 const initialState = initialStateStub;
 
 const voteAddedReducer = (state: GameCardState, action: ChargedAction<Vote>): GameCardState => {
@@ -53,12 +45,25 @@ const voteAddedReducer = (state: GameCardState, action: ChargedAction<Vote>): Ga
 const voteRemovedReducer = (state: GameCardState, action: ChargedAction<string>): GameCardState => {
   return {...state, votes: state.votes.filter(vote => vote.id !== action.payload)};
 };
+const playerRoleChangedReducer = (state: GameCardState, action: ChargedAction<{playerID: string, newRole: PlayerRole}>): GameCardState => {
+  const { newRole } = action.payload;
+  const players = state.players.map(player => {
+    if (player.id === action.payload.playerID && player.role !== newRole) {
+      return player;
+    }
+
+    return {...player, role: newRole};
+  });
+
+  return {...state, players};
+};
 
 // tslint:disable-next-line:no-any
 const reducer = (state: GameCardState = initialState, action: Action<any>) => {
   switch (action.type) {
     case ActionTypes.GameCard.VOTE_ADDED: return voteAddedReducer(state, action);
     case ActionTypes.GameCard.VOTE_REMOVED: return voteRemovedReducer(state, action);
+    case ActionTypes.GameCard.PLAYER_ROLE_CHANGED: return playerRoleChangedReducer(state, action);
     default: return state;
   }
 };
