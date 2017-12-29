@@ -123,5 +123,46 @@ describe('game_card/epic', () => {
         }
       );
     });
+    it('should play end timer sound if timer value equal 0', () => {
+      const { mockedStore, endTimerSoundStub, s } = timerSetup({ startValue: 0 });
+
+      testEpic(
+        timerEpic,
+        `a${s}-b`,
+        `-${s}b`,
+        {
+          a: Action.startTimer(),
+          b: Action.pauseTimer(),
+        },
+        {
+          store: mockedStore,
+          maxFrames: 5000,
+          customExpect: () => {
+            expect(endTimerSoundStub.play.mock.calls.length).toBe(1);
+          }
+        }
+      );
+    });
+    it('should play pip sound when there are 10 seconds left', () => {
+      const { mockedStore, pipSoundStub, s } = timerSetup({ startValue: 5 });
+
+      testEpic(
+        timerEpic,
+        `a${s}-${s}-${s}-b`,
+        `-${s}c${s}c${s}c`,
+        {
+          a: Action.startTimer(),
+          b: Action.pauseTimer(),
+          c: Action.setCurrentTimer(4),
+        },
+        {
+          store: mockedStore,
+          maxFrames: 5000,
+          customExpect: () => {
+            expect(pipSoundStub.play.mock.calls.length).toBe(3);
+          }
+        }
+      );
+    });
   });
 });
