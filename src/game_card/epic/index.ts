@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable,  } from 'rxjs';
 import { combineEpics, ActionsObservable } from 'redux-observable';
 import { MiddlewareAPI } from 'redux';
 import { SimpleAction } from '../../common/types/action';
