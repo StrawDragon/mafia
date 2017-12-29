@@ -1,0 +1,37 @@
+.timer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.fantom {
+  height: 4px;
+  flex-grow: 9;
+  background: #008084;
+  border-radius: 1px;
+}
+
+.progress {
+  height: 4px;
+  width: 100%;
+  background: #88C542;
+  border-radius: 1px;
+  float: right;
+  transition: width 1s linear, background-color 5s linear;
+}
+
+.progress.half {
+  background: #FFAA1C;
+}
+
+.progress.warning {
+  background: #D83000;
+}
+
+.management {
+  padding: 5px;
+  font-size: 14pt;
+  color: #008084;
+  font-weight: 600;
+}

@@ -13,8 +13,9 @@ const stub: GameCardState = {
     currentSheriffCheckingID: undefined,
     currentSpeakerID: undefined,
   },
-  timerValue: 0, // sec
-
+  currentTimerValue: 60, // sec
+  initialTimerValue: 60, // sec
+  isRunTimer: false,
   votes: [
     {
       id: 'v1',

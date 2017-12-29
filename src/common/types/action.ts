@@ -8,3 +8,4 @@ export interface SimpleAction {
 }
 
 export type Action<P> = ChargedAction<P> & SimpleAction;
+
