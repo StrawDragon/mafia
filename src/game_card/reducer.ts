@@ -36,15 +36,6 @@ export interface GameCardState {
   shoots: Array<Shoot>;
 }
 
-// const initialState: GameCardState = {
-//   stage: 0,
-//   votes: [],
-//   votings: [],
-//   players: [],
-//   sheriffChecks: [],
-//   shoots: [],
-// };
-
 const initialState = initialStateStub;
 
 const voteAddedReducer = (state: GameCardState, action: ChargedAction<Vote>): GameCardState => {
@@ -55,9 +46,7 @@ const voteAddedReducer = (state: GameCardState, action: ChargedAction<Vote>): Ga
 const voteRemovedReducer = (state: GameCardState, action: ChargedAction<string>): GameCardState => {
   return {...state, votes: state.votes.filter(vote => vote.id !== action.payload)};
 };
-// TIMER_STARTED: 'GameCard -> TIMER_STARTED',
-// TIMER_PAUSED: 'GameCard -> TIMER_PAUSED',
-// TIMER_SET: 'GameCard -> TIMER_SET',
+
 const timerStartedReducer = (state: GameCardState): GameCardState => {
   return {...state, isRunTimer: true };
 };
