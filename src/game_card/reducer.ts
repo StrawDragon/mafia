@@ -10,6 +10,7 @@ import DonCheck from './types/don_check';
 import Shoot from './types/shoot';
 import ActionTypes from '../common/constants/actionTypes';
 import StageType from './types/stage_type';
+import { validateDistribution } from './core/distribution';
 
 import initialStateStub from './state_stub';
 
@@ -76,6 +77,16 @@ const initialTimerSetReducer = (state: GameCardState, action: ChargedAction<numb
   return {...state, initialTimerValue: action.payload };
 };
 
+const nextRequestedReducer = (state: GameCardState): GameCardState => {
+  const validation = validateDistribution(state.players);
+
+  if (validation.hasError) {
+    return state;
+  } else {
+    return {...state, stage: {...state.stage, type: StageType.MAFIA_COLLUSION} };
+  }
+};
+
 // tslint:disable-next-line:no-any
 const reducer = (state: GameCardState = initialState, action: Action<any>): GameCardState => {
   switch (action.type) {
@@ -86,6 +97,7 @@ const reducer = (state: GameCardState = initialState, action: Action<any>): Game
     case ActionTypes.GameCard.TIMER_PAUSED: return timerPausedReducer(state);
     case ActionTypes.GameCard.TIMER_SET: return currentTimerSetReducer(state, action);
     case ActionTypes.GameCard.TIMER_INITIAL_SET: return initialTimerSetReducer(state, action);
+    case ActionTypes.GameCard.NEXT_REQUESTED: return nextRequestedReducer(state);
     default: return state;
   }
 };
