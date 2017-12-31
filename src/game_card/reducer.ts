@@ -46,13 +46,13 @@ const voteRemovedReducer = (state: GameCardState, action: ChargedAction<string>)
   return {...state, votes: state.votes.filter(vote => vote.id !== action.payload)};
 };
 const playerRoleChangedReducer = (state: GameCardState, action: ChargedAction<{playerID: string, newRole: PlayerRole}>): GameCardState => {
-  const { newRole } = action.payload;
+  const { newRole, playerID } = action.payload;
   const players = state.players.map(player => {
-    if (player.id === action.payload.playerID && player.role !== newRole) {
-      return player;
+    if (player.id === playerID && player.role !== newRole) {
+      return {...player, role: newRole};
     }
 
-    return {...player, role: newRole};
+    return player;
   });
 
   return {...state, players};

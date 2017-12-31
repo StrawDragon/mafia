@@ -32,6 +32,7 @@ const styleLoader = require.resolve('style-loader');
 const getCssModulesLoader = isModules => ({
   loader: require.resolve('typings-for-css-modules-loader'),
   options: {
+    localIdentName: '[local]_[hash:8]',
     modules: isModules,
     namedExport: true,
     camelCase: true

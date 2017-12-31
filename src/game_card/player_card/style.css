@@ -1,5 +1,6 @@
 .card {
-  max-width: 150px;
+  max-width: 135px;
+  width: 135px;
   position: relative;
   font-size: 16px;
   border: 1px solid #afafaf;

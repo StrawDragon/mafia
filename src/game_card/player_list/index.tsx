@@ -15,9 +15,8 @@ interface Props {
 class PlayerListComponent extends React.Component<Props> {
   renderPlayerCards(players: Array<Player>) {
     return players.map((player, index) => (
-      <li className={styles.item}>
+      <li className={styles.item} key={index}>
         <PlayerCard
-            key={index}
             value={player}
             size={this.props.cardSize}
             disabled={player.dayDeathNumber !== undefined}

@@ -13,11 +13,11 @@ interface Props {
 
 export class PlayerCard extends React.Component<Props> {
   renderWarningIcons(count: number) {
-    return Array.from(new Array(count).keys()).map((index) => 
+    return Array.from(new Array(count).keys()).map((index) => (
       <div key={index}>
         <Icon type="warning" />
       </div>
-    );
+    ));
   }
 
   renderDescription(value: Player) {

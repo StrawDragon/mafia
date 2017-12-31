@@ -26,6 +26,7 @@ const styleLoader = require.resolve('style-loader');
 const getCssModulesLoader = isModules => ({
   loader: require.resolve('typings-for-css-modules-loader'),
   options: {
+    localIdentName: '[local]_[hash:8]',
     modules: isModules,
     namedExport: true,
     camelCase: true
@@ -37,6 +38,7 @@ const postcssLoader = {
     // Necessary for external CSS imports to work
     // https://github.com/facebookincubator/create-react-app/issues/2677
     ident: 'postcss',
+    
     plugins: () => [
       require('postcss-flexbugs-fixes'),
       autoprefixer({

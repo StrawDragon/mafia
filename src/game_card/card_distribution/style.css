@@ -1,0 +1,77 @@
+.radio {
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  display: grid;
+  grid-template-areas:
+  "top-left    top-right   "
+  "bottom-left bottom-right"
+  "title title"
+}
+.radio .button {
+  outline: none;
+  width: 100%!important;
+  height: 100%!important;
+  appearance: none;
+  border: solid 1px #afafaf;
+  background: none;
+  box-sizing: border-box;
+  z-index: 1;
+}
+.radio .button.first {
+  border-right: none;
+  border-bottom: none;
+  grid-area: top-left;
+}
+.radio .button.second {
+  border-bottom: none;
+  grid-area: top-right;
+}
+.radio .button.third {
+  border-right: none;
+  grid-area: bottom-left;
+}
+.radio .button.fourth {
+  grid-area: bottom-right;
+}
+
+.radio .button.first:checked, .button.second:checked {
+  border: solid 1px red;
+  box-shadow: 0px 0px 3px 1px red;
+  z-index: 2;
+}
+.radio .button.third:checked, .button.fourth:checked {
+  border: solid 1px black;
+  box-shadow: 0px 0px 3px 1px black;
+  z-index: 2;
+}
+
+.radio .label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.radio .label.first {
+  color: red;
+  grid-area: top-left;
+}
+.radio .label.second {
+  color: red;
+  grid-area: top-right;
+}
+.radio .label.third {
+  color: black;
+  grid-area: bottom-left;
+}
+.radio .label.fourth {
+  color: black;
+  grid-area: bottom-right;
+}
+
+.radio .title {
+  grid-area: title;
+  text-align: center;
+  padding-top: 8px;
+}
