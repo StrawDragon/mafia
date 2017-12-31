@@ -1,5 +1,5 @@
 import ActionTypes from '../common/constants/actionTypes';
-import { ChargedAction } from '../common/types/action';
+import { ChargedAction, SimpleAction } from '../common/types/action';
 import PlayerRole from './types/player_role';
 import Vote from './types/vote';
 
@@ -16,4 +16,22 @@ export const removeVote = (voteID: string): ChargedAction<string> => ({
 export const changePlayerRole = (playerID: string, newRole: PlayerRole): ChargedAction<{playerID: string, newRole: PlayerRole}> => ({
   type: ActionTypes.GameCard.PLAYER_ROLE_CHANGED,
   payload: {playerID, newRole},
+});
+
+export const startTimer = (): SimpleAction => ({
+  type: ActionTypes.GameCard.TIMER_STARTED,
+});
+
+export const pauseTimer = (): SimpleAction => ({
+  type: ActionTypes.GameCard.TIMER_PAUSED,
+});
+
+export const setCurrentTimer = (timerValue: number): ChargedAction<number> => ({
+  type: ActionTypes.GameCard.TIMER_SET,
+  payload: timerValue,
+});
+
+export const setInitialTimer = (initialTimerValue: number): ChargedAction<number> => ({
+  type: ActionTypes.GameCard.TIMER_INITIAL_SET,
+  payload: initialTimerValue,
 });

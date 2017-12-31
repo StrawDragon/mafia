@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import PlayerList from './player_list';
+import Timer from './timer';
 import { LayoutRoot } from '../common/components/layout/root';
 import { LayoutContent } from '../common/components/layout/content';
 import { LayoutBody } from '../common/components/layout/body';
@@ -15,6 +15,7 @@ class GameCard extends React.Component {
         </LayoutHeader>
         <LayoutBody>
           <LayoutContent>
+            <Timer />
             <CardDistribution />
           </LayoutContent>
         </LayoutBody>
