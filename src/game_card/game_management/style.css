@@ -1,0 +1,22 @@
+.game-management {
+  display: flex;
+  height: 80px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-size: 32px;
+}
+.next {
+  display: inline-flex;
+  flex-direction: row;
+  height: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.next-description {
+  padding-right: 10px;
+}

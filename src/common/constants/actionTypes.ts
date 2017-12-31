@@ -7,5 +7,6 @@ export default {
     TIMER_PAUSED: 'GameCard -> TIMER_PAUSED',
     TIMER_SET: 'GameCard -> TIMER_SET',
     TIMER_INITIAL_SET: 'GameCard -> TIMER_INITIAL_SET',
+    NEXT_REQUESTED: 'GameCard -> NEXT_REQUESTED',
   },
 };

@@ -35,3 +35,7 @@ export const setInitialTimer = (initialTimerValue: number): ChargedAction<number
   type: ActionTypes.GameCard.TIMER_INITIAL_SET,
   payload: initialTimerValue,
 });
+
+export const requestNext = (): SimpleAction => ({
+  type: ActionTypes.GameCard.NEXT_REQUESTED,
+});

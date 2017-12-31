@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import Player from '../types/player';
 import PlayerRole from '../types/player_role';
 import { PlayerList } from '../player_list';
+import { Fragment } from '../../common/components/fragment';
 import * as Action from '../actions';
 import styles from './style.css';
+import { GameManagement } from '../game_management';
+import { RootState } from '../../common/reducer/root';
+import { validateDistribution } from '../core/distribution';
 
 const ROLE_TITLE = {
   [PlayerRole.Citizen]: 'Мирный',
@@ -13,26 +17,25 @@ const ROLE_TITLE = {
   [PlayerRole.Don]: 'Дон',
 };
 
-// tslint:disable-next-line
-const eventToRadioRole = (e: React.ChangeEvent<HTMLInputElement>): PlayerRole => (e.target.value as any);
+// tslint:disable no-any
+const eventToRadioRole = (e: React.ChangeEvent<HTMLInputElement>): PlayerRole =>
+  Number.parseInt(e.target.value as any);
+// tslint:enable no-any
 
 interface Props {
+  players: Array<Player>;
   onChangePlayerRole: (playerID: string, newPlayerType: PlayerRole) => void;
+  onNext: () => void;
 }
 
 class CardDistributionComponent extends React.Component<Props> {
   roleChangeHandler = (role: PlayerRole, player: Player) => {
-    const { onChangePlayerRole } = this.props;
-
-    if (player.role === role) {
-      onChangePlayerRole(player.id, PlayerRole.Citizen);
-    } else {
-      onChangePlayerRole(player.id, role);
-    }
+    this.props.onChangePlayerRole(player.id, role);
   }
 
   renderCardContent = (player: Player) => {
-    const handler = (e: React.ChangeEvent<HTMLInputElement>) => this.roleChangeHandler(eventToRadioRole(e), player);
+    const handler = (e: React.ChangeEvent<HTMLInputElement>) =>
+      this.roleChangeHandler(eventToRadioRole(e), player);
 
     return (
       <form className={styles.radio}>
@@ -78,17 +81,36 @@ class CardDistributionComponent extends React.Component<Props> {
   }
 
   render() {
+    const { onNext, players } = this.props;
+    const distributionValidation = validateDistribution(players);
+    const nextDescription = distributionValidation.hasError
+      ? 'Неправильно отмечена раздача'
+      : 'Перейти к договору мафии';
+
     return (
-      <PlayerList
-        cardContentRenderer={this.renderCardContent}
-      />
+      <Fragment>
+        <GameManagement 
+          title="Раздача ролей"
+          nextDescription={nextDescription}
+          onNext={onNext}
+          disabled={distributionValidation.hasError}
+        />
+        <PlayerList
+          cardContentRenderer={this.renderCardContent}
+        />
+      </Fragment>
     );
   }
 }
 
 export const CardDistribution = connect(
-  () => ({}),
+  (state: RootState) => ({
+    players: state.gameCard.players,
+  }),
   (dispatch) => ({
-    onChangePlayerRole: (playerID: string, newPlayerType: PlayerRole) => { dispatch(Action.changePlayerRole(playerID, newPlayerType)); },
+    onChangePlayerRole: (playerID: string, newPlayerType: PlayerRole) => {
+      dispatch(Action.changePlayerRole(playerID, newPlayerType));
+    },
+    onNext: () => { dispatch(Action.requestNext()); },
   }),
 )(CardDistributionComponent);
