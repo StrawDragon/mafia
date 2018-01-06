@@ -23,7 +23,7 @@ class PlayerListComponent extends React.Component<Props> {
         >
           {this.props.cardContentRenderer ?
             this.props.cardContentRenderer(player) :
-            ''
+            null
           }
         </PlayerCard>
       </li>
