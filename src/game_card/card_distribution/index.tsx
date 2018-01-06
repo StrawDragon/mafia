@@ -85,11 +85,11 @@ class CardDistributionComponent extends React.Component<Props> {
     const distributionValidation = validateDistribution(players);
     const nextDescription = distributionValidation.hasError
       ? 'Неправильно отмечена раздача'
-      : 'Перейти к договору мафии';
+      : 'Перейти к договорке мафии';
 
     return (
       <Fragment>
-        <GameManagement 
+        <GameManagement
           title="Раздача ролей"
           nextDescription={nextDescription}
           onNext={onNext}
