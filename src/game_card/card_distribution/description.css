@@ -1,0 +1,13 @@
+.description {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.item {
+  color: green;
+  font-size: 11px;
+}
+
+.error {
+  color: red;
+}

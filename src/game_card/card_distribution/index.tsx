@@ -1,14 +1,16 @@
+import * as Action from '../actions';
 import * as React from 'react';
-import { connect } from 'react-redux';
 import Player from '../types/player';
 import PlayerRole from '../types/player_role';
-import { PlayerList } from '../player_list';
+import { Description } from './description';
 import { Fragment } from '../../common/components/fragment';
-import * as Action from '../actions';
-import styles from './style.css';
 import { GameManagement } from '../game_management';
 import { RootState } from '../../common/reducer/root';
+import { PlayerList } from '../player_list';
+import { connect } from 'react-redux';
 import { validateDistribution } from '../core/distribution';
+
+import styles from './style.css';
 
 const ROLE_TITLE = {
   [PlayerRole.Citizen]: 'Мирный',
@@ -83,15 +85,13 @@ class CardDistributionComponent extends React.Component<Props> {
   render() {
     const { onNext, players } = this.props;
     const distributionValidation = validateDistribution(players);
-    const nextDescription = distributionValidation.hasError
-      ? 'Неправильно отмечена раздача'
-      : 'Перейти к договору мафии';
+    const description = <Description validations={distributionValidation}/>;
 
     return (
       <Fragment>
-        <GameManagement 
+        <GameManagement
           title="Раздача ролей"
-          nextDescription={nextDescription}
+          nextDescription={description}
           onNext={onNext}
           disabled={distributionValidation.hasError}
         />
