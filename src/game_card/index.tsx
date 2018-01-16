@@ -8,6 +8,7 @@ import { CardDistribution } from './card_distribution';
 import { connect } from 'react-redux';
 import { RootState } from '../common/reducer/root';
 import StageType from './types/stage_type';
+import { TimerScreen } from './timer_screen';
 
 interface Props {
   stageType: StageType;
@@ -19,7 +20,21 @@ class GameCard extends React.Component<Props> {
 
     switch (stageType) {
       case StageType.CARD_DISTRIBUTION: return <CardDistribution />;
-      case StageType.MAFIA_COLLUSION: return <span>MAFIA_COLLUSION</span>;
+      case StageType.MAFIA_COLLUSION:
+        return (<TimerScreen
+          stageTitle='Договорка Мафии'
+          nextDescription='Перейти к осмотру города Доном'
+        />);
+      case StageType.DON_CITY_INSPECTION:
+        return (<TimerScreen
+          stageTitle='Осмотр города Доном'
+          nextDescription='Перейти к осмотру города Шерифом'
+        />);
+      case StageType.SHERIFS_CITY_INSPECTION:
+        return (<TimerScreen
+          stageTitle='Осмотр города Шерифом'
+          nextDescription='Перейти утру в городе'
+        />);
       default: return false;
     }
   }
