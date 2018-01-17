@@ -9,7 +9,7 @@ import styles from './style.css';
 interface Props {
   cardSize?: CardSize;
   players: Array<Player>;
-  cardContentRenderer: (player: Player) => React.ReactNode;
+  cardContentRenderer?: (player: Player) => React.ReactNode;
 }
 
 class PlayerListComponent extends React.Component<Props> {
@@ -21,7 +21,10 @@ class PlayerListComponent extends React.Component<Props> {
             size={this.props.cardSize}
             disabled={player.dayDeathNumber !== undefined}
         >
-          {this.props.cardContentRenderer(player)}
+          {this.props.cardContentRenderer ?
+            this.props.cardContentRenderer(player) :
+            null
+          }
         </PlayerCard>
       </li>
     ));

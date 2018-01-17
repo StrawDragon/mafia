@@ -17,9 +17,9 @@ export const validateDistribution = (players: Array<Player>) => {
     }
   }
 
-  const citizenError = { hasError: citizenCount !== 5, count: citizenCount };
+  const citizenError = { hasError: citizenCount !== 6, count: citizenCount };
   const sheriffError = { hasError: sheriffCount !== 1, count: sheriffCount };
-  const mafiaError = { hasError: mafiaCount !== 3, count: mafiaCount };
+  const mafiaError = { hasError: mafiaCount !== 2, count: mafiaCount };
   const donError = { hasError: donCount !== 1, count: donCount };
 
   return {
