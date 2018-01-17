@@ -21,15 +21,13 @@ export const timerEpic = (action$: ActionsObservable<SimpleAction>, store: Middl
     .switchMap(
       ([action, timerTickSound, endTimerSound, pipSound]) => {
         const halfTime = Math.round(store.getState().gameCard.currentTimerValue / 2);
-        const stop$ = pauseTimer$.do(() => timerTickSound.stop());
-        const next$ = nextRequest$.do(() => timerTickSound.stop());
+        const stop$ = pauseTimer$.merge(nextRequest$).do(() => timerTickSound.stop());
 
         timerTickSound.play({ loop: true, startLoop: 1, endLoop: 15 });
 
         return Observable
         .interval(1000)
         .takeUntil(stop$)
-        .takeUntil(next$)
         .map(timerProcessing(store, pipSound, endTimerSound, halfTime));
       }
     );

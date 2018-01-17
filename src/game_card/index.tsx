@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { RootState } from '../common/reducer/root';
 import StageType from './types/stage_type';
 import { TimerScreen } from './timer_screen';
-import { PlayerList } from './player_list/index';
+import { PlayerList } from './player_list';
 
 interface Props {
   stageType: StageType;
