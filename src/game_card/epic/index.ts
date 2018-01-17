@@ -14,13 +14,14 @@ export const timerEpic = (action$: ActionsObservable<SimpleAction>, store: Middl
 
   const pauseTimer$ = action$.ofType(ActionTypes.GameCard.TIMER_PAUSED);
   const startTimer$ = action$.ofType(ActionTypes.GameCard.TIMER_STARTED);
+  const nextRequest$ = action$.ofType(ActionTypes.GameCard.NEXT_REQUESTED);
 
   return startTimer$
     .combineLatest(timerTickSound$, endTimerSound$, pipSound$)
     .switchMap(
       ([action, timerTickSound, endTimerSound, pipSound]) => {
         const halfTime = Math.round(store.getState().gameCard.currentTimerValue / 2);
-        const stop$ = pauseTimer$.do(() => timerTickSound.stop());
+        const stop$ = pauseTimer$.merge(nextRequest$).do(() => timerTickSound.stop());
 
         timerTickSound.play({ loop: true, startLoop: 1, endLoop: 15 });
 
@@ -33,5 +34,5 @@ export const timerEpic = (action$: ActionsObservable<SimpleAction>, store: Middl
 };
 
 export default combineEpics(
-  timerEpic,
+  timerEpic
 );

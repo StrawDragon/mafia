@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { RootState } from '../common/reducer/root';
 import StageType from './types/stage_type';
 import { TimerScreen } from './timer_screen';
+import { PlayerList } from './player_list';
 
 interface Props {
   stageType: StageType;
@@ -35,6 +36,7 @@ class GameCard extends React.Component<Props> {
           stageTitle='Осмотр города Шерифом'
           nextDescription='Перейти утру в городе'
         />);
+      case StageType.CITY_AWAKENING: return <PlayerList />;
       default: return false;
     }
   }
