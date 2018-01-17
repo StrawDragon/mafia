@@ -17,9 +17,10 @@ class PlayerListComponent extends React.Component<Props> {
     return players.map((player, index) => (
       <li className={styles.item} key={index}>
         <PlayerCard
-            value={player}
-            size={this.props.cardSize}
-            disabled={player.dayDeathNumber !== undefined}
+          value={player}
+          size={this.props.cardSize}
+          disabled={player.dayDeathNumber !== undefined}
+          selected={player.numberAtTable === 3}
         >
           {this.props.cardContentRenderer(player)}
         </PlayerCard>
