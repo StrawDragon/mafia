@@ -1,5 +1,7 @@
-import * as Action from '../actions';
 import * as React from 'react';
+import { connect } from 'react-redux';
+
+import * as Action from '../actions';
 import Player from '../types/player';
 import PlayerRole from '../types/player_role';
 import { Description } from './description';
@@ -7,7 +9,6 @@ import { Fragment } from '../../common/components/fragment';
 import { GameManagement } from '../game_management';
 import { RootState } from '../../common/reducer/root';
 import { PlayerList } from '../player_list';
-import { connect } from 'react-redux';
 import { validateDistribution } from '../core/distribution';
 
 import styles from './style.css';

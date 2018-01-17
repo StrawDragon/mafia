@@ -21,20 +21,26 @@ class GameCard extends React.Component<Props> {
     switch (stageType) {
       case StageType.CARD_DISTRIBUTION: return <CardDistribution />;
       case StageType.MAFIA_COLLUSION:
-        return (<TimerScreen
-          stageTitle='Договорка Мафии'
-          nextDescription='Перейти к осмотру города Доном'
-        />);
+        return (
+          <TimerScreen
+            stageTitle="Договорка Мафии"
+            nextDescription="Перейти к осмотру города Доном"
+          />
+        );
       case StageType.DON_CITY_INSPECTION:
-        return (<TimerScreen
-          stageTitle='Осмотр города Доном'
-          nextDescription='Перейти к осмотру города Шерифом'
-        />);
+        return (
+          <TimerScreen
+            stageTitle="Осмотр города Доном"
+            nextDescription="Перейти к осмотру города Шерифом"
+          />
+        );
       case StageType.SHERIFS_CITY_INSPECTION:
-        return (<TimerScreen
-          stageTitle='Осмотр города Шерифом'
-          nextDescription='Перейти утру в городе'
-        />);
+        return (
+          <TimerScreen
+            stageTitle="Осмотр города Шерифом"
+            nextDescription="Перейти утру в городе"
+          />
+        );
       default: return false;
     }
   }

@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import PlayerRole from '../types/player_role';
 import getClassNames from '../../common/utils/get_class_names';
 

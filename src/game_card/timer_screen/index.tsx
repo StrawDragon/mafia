@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+
 import * as Action from '../actions';
 import { PlayerList } from '../player_list';
 import { Fragment } from '../../common/components/fragment';
@@ -15,21 +16,23 @@ interface Props {
 class TimerScreenComponent extends React.Component<Props> {
   render() {
     const { onNext, stageTitle, nextDescription } = this.props;
-    return (<Fragment>
-      <GameManagement
-        title={stageTitle}
-        nextDescription={nextDescription}
-        onNext={onNext}
-      />
-      <Timer />
-      <PlayerList />
-    </Fragment>);
+    return (
+      <Fragment>
+        <GameManagement
+          title={stageTitle}
+          nextDescription={nextDescription}
+          onNext={onNext}
+        />
+        <Timer />
+        <PlayerList />
+      </Fragment>
+    );
   }
 }
 
 export const TimerScreen = connect(
   () => ({}),
   (dispatch) => ({
-    onNext: () => { dispatch(Action.requestNext()) }
+    onNext: () => { dispatch(Action.requestNext()); }
   }),
 )(TimerScreenComponent);
