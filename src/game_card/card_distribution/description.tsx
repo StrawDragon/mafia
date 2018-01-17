@@ -24,8 +24,7 @@ interface Props {
 }
 
 export class Description extends React.Component<Props> {
-  
-  renderItem = (item: Item, playerRole: PlayerRole) => {
+  renderItem = (item: Item, playerRole: string | PlayerRole) => {
     const className = getClassNames(styles.item, styles, {
       error: item.hasError,
     });
@@ -47,8 +46,7 @@ export class Description extends React.Component<Props> {
           {
             Object.keys(PlayerRole)
             .filter(role => validations[role])
-            // tslint:disable-next-line no-any
-            .map(role => this.renderItem(validations[role], role as any))
+            .map(role => this.renderItem(validations[role], role))
           }
         </span>
       )
