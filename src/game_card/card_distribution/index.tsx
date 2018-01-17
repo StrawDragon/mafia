@@ -20,7 +20,7 @@ const ROLE_TITLE = {
 };
 
 // tslint:disable no-any
-const eventToRadioRole = (e: React.ChangeEvent<HTMLInputElement>): PlayerRole =>
+const eventToRole = (e: React.ChangeEvent<HTMLInputElement>): PlayerRole =>
   Number.parseInt(e.target.value as any);
 // tslint:enable no-any
 
@@ -37,7 +37,7 @@ class CardDistributionComponent extends React.Component<Props> {
 
   renderCardContent = (player: Player) => {
     const handler = (e: React.ChangeEvent<HTMLInputElement>) =>
-      this.roleChangeHandler(eventToRadioRole(e), player);
+      this.roleChangeHandler(eventToRole(e), player);
 
     return (
       <form className={styles.radio}>
