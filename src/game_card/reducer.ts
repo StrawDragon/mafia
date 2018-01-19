@@ -11,6 +11,7 @@ import Shoot from './types/shoot';
 import ActionTypes from '../common/constants/actionTypes';
 import StageType from './types/stage_type';
 import { validateDistribution } from './core/distribution';
+import { nextStage } from './core/next_stage';
 
 import initialStateStub from './state_stub';
 
@@ -82,9 +83,11 @@ const nextRequestedReducer = (state: GameCardState): GameCardState => {
 
   if (validation.hasError) {
     return state;
-  } else {
-    return {...state, stage: {...state.stage, type: StageType.MAFIA_COLLUSION} };
   }
+  if (state.stage.type in nextStage) {
+    return nextStage[state.stage.type](state);
+  }
+  return  state;
 };
 
 // tslint:disable-next-line:no-any

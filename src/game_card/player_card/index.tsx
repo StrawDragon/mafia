@@ -11,6 +11,7 @@ interface Props {
   value: Player;
   disabled?: boolean;
   size?: CardSize;
+  selected?: boolean; 
 }
 
 export class PlayerCard extends React.Component<Props> {
@@ -32,12 +33,13 @@ export class PlayerCard extends React.Component<Props> {
   }
 
   render() {
-    const { value, disabled, size, children } = this.props;
+    const { value, disabled, size, children, selected } = this.props;
     const { card, card__number, avatar, warnings, body } = styles;
     const cardClassNames = getClassNames(card, styles, {
       disabled: disabled,
       small: size === 'small',
-      large: size === 'large'
+      large: size === 'large',
+      selected: selected,
     });
 
     return (
