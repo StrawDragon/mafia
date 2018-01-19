@@ -41,3 +41,10 @@
 .body {
   background: #eaeaf5;
 }
+
+.card.selected {
+	box-shadow: 0 0 30px #FFFF00;
+	position: relative;
+	top: -15px;
+}
+

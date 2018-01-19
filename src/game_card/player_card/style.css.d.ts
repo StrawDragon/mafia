@@ -6,3 +6,4 @@ export const cardNumber: string;
 export const warnings: string;
 export const avatar: string;
 export const body: string;
+export const selected: string;
