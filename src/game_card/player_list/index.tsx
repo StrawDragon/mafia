@@ -12,7 +12,7 @@ interface Props {
   cardContentRenderer?: (player: Player) => React.ReactNode;
 }
 
-class PlayerListComponent extends React.Component<Props> {
+export class PlayerListComponent extends React.Component<Props> {
   renderPlayerCards(players: Array<Player>) {
     return players.map((player, index) => (
       <li className={styles.item} key={index}>
