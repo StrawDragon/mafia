@@ -6,7 +6,7 @@ import { RootState } from '../../common/reducer/root';
 import { CardSize } from '../types/card_size';
 import styles from './style.css';
 
-interface Props {
+export interface Props {
   cardSize?: CardSize;
   players: Array<Player>;
   cardContentRenderer?: (player: Player) => React.ReactNode;
