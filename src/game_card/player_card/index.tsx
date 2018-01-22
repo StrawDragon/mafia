@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { Avatar, Icon } from 'antd';
+
 import Player from '../types/player';
 import getClassNames from '../../common/utils/get_class_names';
-import { Avatar, Icon } from 'antd';
 import { CardSize } from '../types/card_size';
+
 import styles from './style.css';
 
 interface Props {

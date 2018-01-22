@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+
+import * as Action from '../actions';
 import Player from '../types/player';
 import PlayerRole from '../types/player_role';
-import { PlayerList } from '../player_list';
+import { Description } from './description';
 import { Fragment } from '../../common/components/fragment';
-import * as Action from '../actions';
-import styles from './style.css';
 import { GameManagement } from '../game_management';
 import { RootState } from '../../common/reducer/root';
+import { PlayerList } from '../player_list';
 import { validateDistribution } from '../core/distribution';
+
+import styles from './style.css';
 
 const ROLE_TITLE = {
   [PlayerRole.Citizen]: 'Мирный',
@@ -18,7 +21,7 @@ const ROLE_TITLE = {
 };
 
 // tslint:disable no-any
-const eventToRadioRole = (e: React.ChangeEvent<HTMLInputElement>): PlayerRole =>
+const eventToRole = (e: React.ChangeEvent<HTMLInputElement>): PlayerRole =>
   Number.parseInt(e.target.value as any);
 // tslint:enable no-any
 
@@ -35,7 +38,7 @@ class CardDistributionComponent extends React.Component<Props> {
 
   renderCardContent = (player: Player) => {
     const handler = (e: React.ChangeEvent<HTMLInputElement>) =>
-      this.roleChangeHandler(eventToRadioRole(e), player);
+      this.roleChangeHandler(eventToRole(e), player);
 
     return (
       <form className={styles.radio}>
@@ -83,15 +86,13 @@ class CardDistributionComponent extends React.Component<Props> {
   render() {
     const { onNext, players } = this.props;
     const distributionValidation = validateDistribution(players);
-    const nextDescription = distributionValidation.hasError
-      ? 'Неправильно отмечена раздача'
-      : 'Перейти к договорке мафии';
+    const description = <Description validations={distributionValidation}/>;
 
     return (
       <Fragment>
         <GameManagement
           title="Раздача ролей"
-          nextDescription={nextDescription}
+          nextDescription={description}
           onNext={onNext}
           disabled={distributionValidation.hasError}
         />
