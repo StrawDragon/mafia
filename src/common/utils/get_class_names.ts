@@ -1,11 +1,8 @@
 import { Dictionary } from '../types/dictionary';
 
-type Condition = boolean & (() => string);
+type Condition = boolean | undefined;
 
-const byStyleCondition = (styleCondition: [string, Condition]) =>
-  typeof styleCondition[1] === 'function'
-    ? styleCondition[1]()
-    : !!styleCondition[1];
+const byStyleCondition = (styleCondition: [string, Condition]) => !!styleCondition[1];
 
 const toModifierBy = (styles: Dictionary<string>) =>
   (styleCondition: [string, Condition]) =>
