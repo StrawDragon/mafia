@@ -143,6 +143,11 @@ describe('game_card/player_list', () => {
       expect(playerCardWrappers().at(1).props().disabled).toBe(false);
       expect(playerCardWrappers().at(2).props().disabled).toBe(false);
     });
-    // опциональный дизейблинг мертвых игроков
+  });
+  describe('PlayerListComponent', () => {
+    it('должен отрисовать список игроков из стейта', () => {
+      expect(false).toBe(true);
+    });
+    // если передан список игроков как параметр то должен отрисовать его
   });
 });
