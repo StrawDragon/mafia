@@ -25,5 +25,14 @@ export const nextStage = {
     stage: { ...state.stage, type: StageType.CITY_AWAKENING },
     currentTimerValue: 60,
     isRunTimer: false
+  }),
+  [StageType.CITY_AWAKENING]: (state: GameCardState): GameCardState => ({
+    ...state,
+    stage: {
+      ...state.stage,
+      type: state.stage.currentShootingID ? StageType.SHOT_DEAD_PLAYER_SPEAKING : StageType.DAY_SPEAKING
+    },
+    currentTimerValue: 60,
+    isRunTimer: false
   })
 };

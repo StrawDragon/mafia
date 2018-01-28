@@ -1,5 +1,5 @@
 import deepMerge from 'deepmerge';
-import { MiddlewareAPI } from 'redux';
+import { MiddlewareAPI, Reducer } from 'redux';
 import reducer, { RootState } from '../reducer/root';
 
 // TODO need to improve
@@ -7,13 +7,16 @@ type PartialDeep<T> = Partial<{
   [ P in keyof T ]: PartialDeep<T[ P ]>;
 }>;
 
-export const mockStore = (statePath: PartialDeep<RootState>): MiddlewareAPI<RootState> => ({
+export const mockStore = (statePatch: PartialDeep<RootState>): MiddlewareAPI<RootState> => ({
   // tslint:disable-next-line
   dispatch: (a: any) => a,
-  getState: () => deepMerge(
+  getState: () => mockState(reducer, statePatch) as any
+});
+
+export const mockState = <T>(reducer: Reducer<T>, statePatch: PartialDeep<T>): any => deepMerge(
     // tslint:disable-next-line
     reducer((undefined as any), { type: '@@INITIAL' }),
-    statePath,
+    statePatch,
   // tslint:disable-next-line
-  ) as any,
-});
+  ) as any;
+
