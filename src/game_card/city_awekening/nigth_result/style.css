@@ -1,0 +1,11 @@
+.nigth-result {
+  text-align: center;
+}
+
+.hit {
+  color: #cc2a1f;
+}
+
+.miss {
+  color: #2e970e;
+}
