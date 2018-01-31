@@ -9,22 +9,31 @@ import styles from './style.css';
 export interface Props {
   players: Array<Player>;
   currentDay: number;
+  disable?: boolean;
   cardSize?: CardSize;
   selectedPlayerNumber?: number;
   cardContentRenderer?: (player: Player) => React.ReactNode;
   disableDeathPlayers?: boolean;
 }
 
+const isDisabledPlayer = (props: Props, dayDeathNumber?: number) => {
+  const { disable, disableDeathPlayers = true, currentDay } = props;
+
+  if (disable) { return true; }
+
+  const isDeathPlayer = dayDeathNumber !== undefined && dayDeathNumber <= currentDay;
+
+  return disableDeathPlayers ? isDeathPlayer : false;
+};
+
 export class PlayerListComponent extends React.Component<Props> {
   renderPlayerCards(players: Array<Player>) {
     return players.map((player, index) => {
-      const { disableDeathPlayers, selectedPlayerNumber, currentDay, cardSize } = this.props;
+      const { selectedPlayerNumber, cardSize, cardContentRenderer } = this.props;
       const { dayDeathNumber, numberAtTable } = player;
 
-      const disabled = disableDeathPlayers || disableDeathPlayers === undefined
-        ? dayDeathNumber !== undefined && dayDeathNumber <= currentDay
-        : false;
-
+      const cardContent = cardContentRenderer ? cardContentRenderer(player) : null;
+      const disabled = isDisabledPlayer(this.props, dayDeathNumber);
       const selected = numberAtTable === selectedPlayerNumber;
       const size = cardSize || 'normal';
 
@@ -36,10 +45,7 @@ export class PlayerListComponent extends React.Component<Props> {
             disabled={disabled}
             selected={selected}
           >
-            {this.props.cardContentRenderer ?
-              this.props.cardContentRenderer(player) :
-              null
-            }
+            {cardContent}
           </PlayerCard>
         </li>
       );
