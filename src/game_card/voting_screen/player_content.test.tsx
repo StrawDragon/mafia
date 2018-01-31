@@ -2,9 +2,11 @@ import * as React from 'react';
 import {shallow } from 'enzyme';
 import { PlayerContent, Props } from './player_content';
 
-const render = (overwriteProps: Partial<Props> = {}) => {
+const render = (overrideProps: Partial<Props> = {}) => {
   const props = {
-    ...overwriteProps,
+    value: false,
+    onToggleVote: () => ({}),
+    ...overrideProps,
   };
   
   const wrapper = shallow(<PlayerContent {...props} />);
