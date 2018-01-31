@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { PlayerContent, Props } from './player_content';
 
 const render = (overrideProps: Partial<Props> = {}) => {
@@ -13,7 +13,7 @@ const render = (overrideProps: Partial<Props> = {}) => {
   
   return {
     wrapper,
-    voteButton: () => wrapper.findWhere(shallow => shallow.is('button') && shallow.prop('name') === 'vote-button'),
+    voteButton: () => wrapper.findWhere(shallowWrap => shallowWrap.is('button') && shallowWrap.prop('name') === 'vote-button'),
   };
 };
 
