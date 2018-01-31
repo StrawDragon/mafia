@@ -58,13 +58,13 @@ describe('game_card / voting_screen', () => {
 
       expect(onNext.mock.calls.length).toBe(1);
     });
-    // it('Должен отображать список игроков с кнопкой голоса', () => {
-    //   const players = makePlayersByIDs(['1', '2', '3']);
+    it('Должен отображать список игроков с кнопкой голоса', () => {
+      const players = makePlayersByIDs(['1', '2', '3']);
 
-    //   const { playerListWrapper } = render({ players });
+      const { playerListWrapper } = render({ players });
       
-    //   // expect(playerListWrapper().at(0).props().)
-    // });
+      expect(playerListWrapper().at(0).props().)
+    });
     // Должен при нажатии кнопки голоса вызывать onToggle и передавать id игроков который голосует и за которого голосуют
     // Должен давать возможность дисейблить список игроков
     // Подумать над nextDescription
