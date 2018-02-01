@@ -39,15 +39,15 @@ class GameCard extends React.Component<Props> {
       case StageType.SHERIFS_CITY_INSPECTION:
         return (
           <TimerScreen
-            stageTitle='Осмотр города Шерифом'
-            nextDescription='Перейти утру в городе'
+            stageTitle="Осмотр города Шерифом"
+            nextDescription="Перейти утру в городе"
           />
         );
       case StageType.CITY_AWAKENING:
         return (
           <CityAwekening
-            stageTitle='Утро в городе'
-            nextDescription='Перейти к обсуждению в течении дня'
+            stageTitle="Утро в городе"
+            nextDescription="Перейти к обсуждению в течении дня"
           />
         );
       case StageType.DAY_SPEAKING:

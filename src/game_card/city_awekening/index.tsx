@@ -12,25 +12,27 @@ interface Props {
   stageTitle: string;
   nextDescription: string;
   currentShootingID: string;
-  shoots: Array<Shoot>,
+  shoots: Array<Shoot>;
   onNext: () => void;
 }
 
 class CityAwekeningComponent extends React.Component<Props> {
   render() {
     const { onNext, stageTitle, nextDescription, currentShootingID, shoots } = this.props;
-    return (<Fragment>
-      <GameManagement
-        title={stageTitle}
-        nextDescription={nextDescription}
-        onNext={onNext}
-      />
-      <NigthResult
-        id={currentShootingID}
-        shoots={shoots}
-      />
-      <PlayerList />
-    </Fragment>);
+    return (
+      <Fragment>
+        <GameManagement
+          title={stageTitle}
+          nextDescription={nextDescription}
+          onNext={onNext}
+        />
+        <NigthResult
+          id={currentShootingID}
+          shoots={shoots}
+        />
+        <PlayerList />
+      </Fragment>
+    );
   }
 }
 
@@ -40,6 +42,6 @@ export const CityAwekening = connect(
     shoots: state.gameCard.shoots
   }),
   (dispatch) => ({
-    onNext: () => { dispatch(Action.requestNext()) }
+    onNext: () => { dispatch(Action.requestNext()); }
   })
 )(CityAwekeningComponent);
