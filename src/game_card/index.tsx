@@ -9,8 +9,8 @@ import { connect } from 'react-redux';
 import { RootState } from '../common/reducer/root';
 import StageType from './types/stage_type';
 import { TimerScreen } from './timer_screen';
-import { PlayerList } from './player_list';
 import { CityAwekening } from './city_awekening';
+import { DaySpeaking } from './day_speaking/index';
 
 interface Props {
   stageType: StageType;
@@ -51,7 +51,9 @@ class GameCard extends React.Component<Props> {
           />
         );
       case StageType.DAY_SPEAKING:
-        return (<PlayerList />);
+        return (<DaySpeaking />);
+      case StageType.VOTING:
+        return (<h1>В разработке</h1>);
       default: return false;
     }
   }
