@@ -14,6 +14,10 @@ interface Props {
 }
 
 class DaySpeakingComponent extends React.Component<Props> {
+  ToggleSuspectRender(player: Player) {
+    return <ToggleSuspect player={player} />;
+  }
+
   render() {
     const { onNext, currentSpeaker } = this.props;
     return (<Fragment>
@@ -25,6 +29,7 @@ class DaySpeakingComponent extends React.Component<Props> {
       <Timer />
       <PlayerList
         selectedPlayerNumber={currentSpeaker.numberAtTable}
+        cardContentRenderer={this.ToggleSuspectRender}
       />
     </Fragment>);
   }
