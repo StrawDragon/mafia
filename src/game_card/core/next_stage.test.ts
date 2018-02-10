@@ -1,7 +1,7 @@
 import StageType from '../types/stage_type';
 import { mockState } from '../../common/utils/mock_store';
 import gameCardReducer from '../reducer';
-import PlayerRole from '../types/player_role';
+// import PlayerRole from '../types/player_role';
 import { nextStage } from './next_stage';
 
 describe('game_card › core › next_stages', () => {
@@ -86,7 +86,7 @@ describe('game_card › core › next_stages', () => {
     });
   });
   describe('CITY_AWAKENING', () => {
-    it(`Должен поменять стадию на DAY_SPEAKING и сбросить таймер на 60 сек и
+    /* it(`Должен поменять стадию на DAY_SPEAKING и сбросить таймер на 60 сек и
       должен начинать обсуждение с игрока, идущего следующим после игрока,
       который открывал стол в прошлый день`, () => {
       const input = mockState(gameCardReducer, {
@@ -123,7 +123,7 @@ describe('game_card › core › next_stages', () => {
       })
       const actual = nextStage[StageType.CITY_AWAKENING](input);
       expect(actual).toEqual(expected);
-    });
+    }); */
     it('Должен поменять стадию на SHOT_DEAD_PLAYER_SPEAKING и сбросить таймер на 60 сек', () => {
       const input = mockState(gameCardReducer, {
         stage: {

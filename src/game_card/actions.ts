@@ -39,3 +39,8 @@ export const setInitialTimer = (initialTimerValue: number): ChargedAction<number
 export const requestNext = (): SimpleAction => ({
   type: ActionTypes.GameCard.NEXT_REQUESTED,
 });
+
+export const toggleSuspect = (playerID: string, initiatorID: string): ChargedAction<{ playerID: string, initiatorID: string }> => ({
+  type: ActionTypes.GameCard.SUSPECT_TOGGLED,
+  payload: { playerID, initiatorID },
+});

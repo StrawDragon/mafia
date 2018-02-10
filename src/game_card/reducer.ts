@@ -1,3 +1,4 @@
+import shortid from 'shortid';
 import { Action, ChargedAction } from '../common/types/action';
 import Vote from './types/vote';
 import Voting from './types/voting';
@@ -90,6 +91,31 @@ const nextRequestedReducer = (state: GameCardState): GameCardState => {
   return  state;
 };
 
+const suspectToggled = (state: GameCardState, action: ChargedAction<{ playerID: string, initiatorID: string }>): GameCardState => {
+  const { votings, day } = state;
+  const { initiatorID, playerID } = action.payload;
+
+  const targetVoting = votings.find(voting => voting.dayNumber === day && voting.initiatorID === initiatorID && voting.playerID === playerID)
+
+  if (targetVoting) {
+    return {
+      ...state,
+      votings: votings.filter(voting => voting !== targetVoting),
+    };
+  } else {
+    return {
+      ...state,
+      votings: [...votings, {
+        id: shortid.generate(),
+        dayNumber: day,
+        playerID,
+        initiatorID,
+      }]
+    };
+  }
+
+};
+
 // tslint:disable-next-line:no-any
 const reducer = (state: GameCardState = initialState, action: Action<any>): GameCardState => {
   switch (action.type) {
@@ -101,6 +127,7 @@ const reducer = (state: GameCardState = initialState, action: Action<any>): Game
     case ActionTypes.GameCard.TIMER_SET: return currentTimerSetReducer(state, action);
     case ActionTypes.GameCard.TIMER_INITIAL_SET: return initialTimerSetReducer(state, action);
     case ActionTypes.GameCard.NEXT_REQUESTED: return nextRequestedReducer(state);
+    case ActionTypes.GameCard.SUSPECT_TOGGLED: return suspectToggled(state, action);
     default: return state;
   }
 };

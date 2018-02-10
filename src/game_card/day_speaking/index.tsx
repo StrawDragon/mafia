@@ -5,31 +5,48 @@ import { PlayerList } from '../player_list';
 import { Fragment } from '../../common/components/fragment';
 import { GameManagement } from '../game_management';
 import Timer from '../timer';
+import { RootState } from '../../common/reducer/root';
+import Player from '../types/player';
+import { ToggleSuspect } from './toggle_suspect';
 
 interface Props {
-  stageTitle: string;
-  nextDescription: string;
+  currentSpeaker: Player;
   onNext: () => void;
 }
 
-class TimerScreenComponent extends React.Component<Props> {
+class DaySpeakingComponent extends React.Component<Props> {
+  ToggleSuspectRender(player: Player) {
+    return <ToggleSuspect player={player} />;
+  }
+
   render() {
-    const { onNext, stageTitle, nextDescription } = this.props;
-    return (<Fragment>
+    const { onNext, currentSpeaker } = this.props;
+    return (
+    <Fragment>
       <GameManagement
-        title={stageTitle}
-        nextDescription={nextDescription}
+        title={`Говорит господин ${currentSpeaker.nickname}`}
+        nextDescription={'Перейти к следующему игроку'}
         onNext={onNext}
       />
       <Timer />
-      <PlayerList />
-    </Fragment>);
+      <PlayerList
+        selectedPlayerNumber={currentSpeaker.numberAtTable}
+        cardContentRenderer={this.ToggleSuspectRender}
+      />
+    </Fragment>
+    );
   }
 }
 
-export const TimerScreen = connect(
-  () => ({}),
+export const DaySpeaking = connect(
+  (state: RootState) => {
+    const { players, stage: { currentSpeakerID } } = state.gameCard;
+    const currentSpeaker = players.find(player => player.id === currentSpeakerID);
+    return {
+      currentSpeaker
+    };
+  },
   (dispatch) => ({
-    onNext: () => { dispatch(Action.requestNext()) }
+    onNext: () => { dispatch(Action.requestNext()); }
   }),
-)(TimerScreenComponent);
+)(DaySpeakingComponent);

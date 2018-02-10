@@ -6,7 +6,7 @@ const stub: GameCardState = {
   day: 0,
   lastOpenedDaySpeakerID: 'pl9',
   stage: {
-    type: StageType.CARD_DISTRIBUTION,
+    type: StageType.CITY_AWAKENING,
     currentVotingID: undefined,
     currentShootingID: undefined,
     currentDonCheckingID: undefined,
@@ -28,32 +28,7 @@ const stub: GameCardState = {
       playerID: 'pl0',
     },
   ],
-  votings: [
-    {
-      id: 'vi0',
-      order: 0,
-      dayNumber: 0,
-      playerID: 'pl1',
-    },
-    {
-      id: 'vi1',
-      order: 1,
-      dayNumber: 0,
-      playerID: 'pl2',
-    },
-    {
-      id: 'vi3',
-      order: 2,
-      dayNumber: 1,
-      playerID: 'pl5',
-    },
-    {
-      id: 'vi4',
-      order: 3,
-      dayNumber: 1,
-      playerID: 'pl9',
-    },
-  ],
+  votings: [],
   carCrashes: [],
   airCrashes: [],
   players: [
@@ -82,7 +57,7 @@ const stub: GameCardState = {
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMeErUy9dEmlVNmN3L8qApzbZZjJ7ZJEeZVdL5LIEJNm_v4cRH',
       dayDeathNumber: undefined,
       warningCount: 0,
-      role: PlayerRole.Citizen,
+      role: PlayerRole.Mafia,
     },
     {
       id: 'pl3',
@@ -100,7 +75,7 @@ const stub: GameCardState = {
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhmC9v77KJFkkkh6e4c9VWMVA_ocumZJ_HEFqMwvGFb8mP_A-j',
       dayDeathNumber: undefined,
       warningCount: 0,
-      role: PlayerRole.Citizen,
+      role: PlayerRole.Mafia,
     },
     {
       id: 'pl5',
@@ -109,7 +84,7 @@ const stub: GameCardState = {
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShzuWp1XTLo1wGiGzOvfV_TXjNZxqBORYia7y0RoHT6bzas2bD',
       dayDeathNumber: undefined,
       warningCount: 0,
-      role: PlayerRole.Citizen,
+      role: PlayerRole.Sheriff,
     },
     {
       id: 'pl6',
@@ -127,7 +102,7 @@ const stub: GameCardState = {
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMIGQ5Yc-aLcBWYVVrooL6I_QyublVOU67ac530HSIY6gpErgF',
       dayDeathNumber: undefined,
       warningCount: 0,
-      role: PlayerRole.Citizen,
+      role: PlayerRole.Don,
     },
     {
       id: 'pl8',

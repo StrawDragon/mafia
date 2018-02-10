@@ -1,28 +1,23 @@
 import Player from '../types/player';
 
-export const getNextSpeaker = (players: Array<Player>, lastOpenedDaySpeakerID: string, currentDay: number, currentSpeakerID?: string) => {
+export const getNextSpeaker = (players: Array<Player>, day: number, lastOpenedSpeakerID: string, currentSpeakerID?: string) => {
+  const lastOpenedSpeaker = players.find(player => player.id === lastOpenedSpeakerID) || players[0];
+  const currentSpeaker = players.find(player => player.id === currentSpeakerID) || players[0];
   const doublePlayers = [ ...players, ...players ];
 
-  // currentOpenedDaySpeaker - вместо players[0] должен быть следующий живой игрок от начала списка
-  const currentOpenedDaySpeaker = players.find(player => player.id === lastOpenedDaySpeakerID) || players[0];
-  // currentSpeaker - вместо players[1] должен быть следующий живой игрок после currentOpenedDaySpeaker
-  // сделать тоже самое для get_first_speaker.ts
-  const currentSpeaker = players.find(player => player.id === currentSpeakerID) || players[1];
-
-  let nextSpeaker: Player | undefined = doublePlayers[currentSpeaker.numberAtTable + 1];
-
-  for (let i = currentSpeaker.numberAtTable + 1; i < doublePlayers.length; i++ ) {
+  let nextSpeaker: Player | undefined = currentSpeaker ? doublePlayers[currentSpeaker.numberAtTable + 1] : players[1];
+  for (let i = nextSpeaker.numberAtTable; i < doublePlayers.length; i++) {
     const player = doublePlayers[i];
-    const isDeathPlayer = player.dayDeathNumber && player.dayDeathNumber <= currentDay;
+    const isAlive = !player.dayDeathNumber || player.dayDeathNumber > day;
 
-    if (isDeathPlayer) { continue; }
-
-    if (currentOpenedDaySpeaker.numberAtTable + 10 > i) {
-      nextSpeaker = doublePlayers[i];
-    } else {
+    if (lastOpenedSpeaker.numberAtTable === player.numberAtTable) {
       nextSpeaker = undefined;
+      break;
     }
-
+    if (!isAlive) {
+      continue;
+    }
+    nextSpeaker = player;
     break;
   }
 
