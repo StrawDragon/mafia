@@ -44,3 +44,8 @@ export const toggleSuspect = (playerID: string, initiatorID: string): ChargedAct
   type: ActionTypes.GameCard.SUSPECT_TOGGLED,
   payload: { playerID, initiatorID },
 });
+
+export const toggleVote = (playerID: string): ChargedAction<string> => ({
+  type: ActionTypes.GameCard.VOTE_TOGGLED,
+  payload: playerID,
+});

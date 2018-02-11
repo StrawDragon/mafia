@@ -10,37 +10,43 @@ import * as Actions from '../actions';
 
 export interface Props {
   currentDay: number;
-  eliminationPlayer?: Player;
-  disablePlayerList?: boolean;
+  eliminationPlayer: Player | undefined;
   players: Array<Player>;
   votes: Array<Vote>;
-  onToggleVote: (eliminationPlayerID: string, votingPlayerID: string) => void;
+  disabledPlayers: Array<Player>;
+  onToggleVote: (playerID: string) => void;
   onNext: () => void;
 }
 
 export class VotingScreenComponent extends React.Component<Props> {
   cardContentRenderer = (player: Player) => {
-    const { votes, eliminationPlayer, onToggleVote } = this.props;
+    const { votes, eliminationPlayer, onToggleVote, disabledPlayers } = this.props;
+
+    if (!eliminationPlayer) {
+      return null;
+    }
 
     const value = !!votes.find(vote => vote.playerID === player.id);
-    const eliminationPlayerID = eliminationPlayer ? eliminationPlayer.id : '';
+    const disabled = !!disabledPlayers.find(disabledPlayer => disabledPlayer === player);
 
     return (
       <PlayerContent
         value={value}
-        onToggleVote={() => onToggleVote(eliminationPlayerID, player.id)}
+        onToggleVote={() => onToggleVote(player.id)}
+        disable={disabled}
       />
     );
   }
 
   render() {
-    const { eliminationPlayer, onNext, players, currentDay, disablePlayerList } = this.props;
+    const { eliminationPlayer, onNext, players, currentDay } = this.props;
 
-    const eliminationPlayerNickname = eliminationPlayer ? eliminationPlayer.nickname : 'player';
+    const title = eliminationPlayer ? `Голосование за вылет игрока ${eliminationPlayer.nickname}` : 'Нет игроков выставленных на голосование';
+    const selectedPlayerNumber = eliminationPlayer ? eliminationPlayer.numberAtTable : undefined;
     return (
       <div>
         <GameManagement
-          title={`Голосование за вылет игрока ${eliminationPlayerNickname}`}
+          title={title}
           nextDescription={'next'}
           onNext={onNext}
         />
@@ -48,7 +54,7 @@ export class VotingScreenComponent extends React.Component<Props> {
           players={players}
           currentDay={currentDay}
           cardContentRenderer={this.cardContentRenderer}
-          disable={disablePlayerList}
+          selectedPlayerNumber={selectedPlayerNumber}
         />
       </div>
     );
@@ -57,22 +63,36 @@ export class VotingScreenComponent extends React.Component<Props> {
 
 export const VotingScreen = connect(
   (state: RootState) => {
-    const { votings, players } = state.gameCard;
+    const { votings, players, votes, day } = state.gameCard;
     const { currentVotingID } = state.gameCard.stage;
 
-    const currentVoting = votings.find(voting => voting.id === currentVotingID);
-    const eliminationPlayerID = currentVoting ? currentVoting.playerID : '';
+    const currentVotingIndex = votings.findIndex(voting => voting.id === currentVotingID);
+    const prevDayVotings = votings.filter((voting, index) => voting.dayNumber === day && index < currentVotingIndex);
+    const eliminationPlayerID = currentVotingIndex > -1 ? votings[currentVotingIndex].playerID : '';
     const eliminationPlayer = players.find(player => player.id === eliminationPlayerID);
 
+    const disabledPlayers = players.filter(player => {
+      const playerVote = votes.find(vote => vote.playerID === player.id && vote.votingID === currentVotingID);
+      
+      if (!playerVote) {
+        return false;
+      }
+
+      const isPrevVote = !!prevDayVotings.find(voting => playerVote.votingID === voting.id);
+
+      return isPrevVote;
+    });
+
     return {
-      currentDay: state.gameCard.day,
+      currentDay: day,
       eliminationPlayer,
-      players: state.gameCard.players,
-      votes: state.gameCard.votes,
+      disabledPlayers,
+      players: players,
+      votes: votes,
     };
   },
   (dispatch) => ({
-    onToggleVote: (eliminationPlayerID: string, votingID: string) => {},
+    onToggleVote: (playerID: string) => { dispatch(Actions.toggleVote(playerID)); },
     onNext: () => { dispatch(Actions.requestNext()); },
   }),
 )(VotingScreenComponent);

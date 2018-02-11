@@ -9,5 +9,6 @@ export default {
     TIMER_INITIAL_SET: 'GameCard -> TIMER_INITIAL_SET',
     NEXT_REQUESTED: 'GameCard -> NEXT_REQUESTED',
     SUSPECT_TOGGLED: 'GameCard -> SUSPECT_TOGGLED',
+    VOTE_TOGGLED: 'GameCard -> VOTE_TOGGLED',
   },
 };

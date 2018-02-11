@@ -5,18 +5,21 @@ import styles from './player_content.css';
 export interface Props {
   onToggleVote: () => void;
   value: boolean;
+  disable?: boolean;
 }
 
 export class PlayerContent extends React.Component<Props> {
   render() {
-    const { onToggleVote } = this.props;
+    const { onToggleVote, value, disable } = this.props;
     const classNames = getClassNames('player-content', styles, {
       'voted': true,
     });
 
     return (
       <div className={classNames}>
-        <button name="vote-button" onClick={onToggleVote} />
+        <button name="vote-button" onClick={onToggleVote} disabled={disable}>
+          {value ? 'За' : 'Против'}
+        </button>
       </div>
     );
   }

@@ -91,7 +91,7 @@ const nextRequestedReducer = (state: GameCardState): GameCardState => {
   return  state;
 };
 
-const suspectToggled = (state: GameCardState, action: ChargedAction<{ playerID: string, initiatorID: string }>): GameCardState => {
+const suspectToggledReducer = (state: GameCardState, action: ChargedAction<{ playerID: string, initiatorID: string }>): GameCardState => {
   const { votings, day } = state;
   const { initiatorID, playerID } = action.payload;
 
@@ -113,7 +113,33 @@ const suspectToggled = (state: GameCardState, action: ChargedAction<{ playerID: 
       }]
     };
   }
+};
 
+const voteToggledReducer = (state: GameCardState, action: ChargedAction<string>): GameCardState => {
+  const { stage: { currentVotingID }, votes } = state;
+  const playerID = action.payload;
+
+  if (!currentVotingID) {
+    return state;
+  }
+
+  const targetVote = votes.find(vote => vote.votingID === currentVotingID && vote.playerID === playerID);
+
+  if (targetVote) {
+    return {
+      ...state,
+      votes: votes.filter(vote => vote !== targetVote),
+    };
+  } else {
+    return {
+      ...state,
+      votes: [...votes, {
+        id: shortid.generate(),
+        votingID: currentVotingID,
+        playerID,
+      }]
+    };
+  }
 };
 
 // tslint:disable-next-line:no-any
@@ -127,7 +153,8 @@ const reducer = (state: GameCardState = initialState, action: Action<any>): Game
     case ActionTypes.GameCard.TIMER_SET: return currentTimerSetReducer(state, action);
     case ActionTypes.GameCard.TIMER_INITIAL_SET: return initialTimerSetReducer(state, action);
     case ActionTypes.GameCard.NEXT_REQUESTED: return nextRequestedReducer(state);
-    case ActionTypes.GameCard.SUSPECT_TOGGLED: return suspectToggled(state, action);
+    case ActionTypes.GameCard.SUSPECT_TOGGLED: return suspectToggledReducer(state, action);
+    case ActionTypes.GameCard.VOTE_TOGGLED: return voteToggledReducer(state, action);
     default: return state;
   }
 };

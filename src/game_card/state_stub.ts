@@ -16,18 +16,7 @@ const stub: GameCardState = {
   currentTimerValue: 60, // sec
   initialTimerValue: 60, // sec
   isRunTimer: false,
-  votes: [
-    {
-      id: 'v1',
-      votingID: 'vi0',
-      playerID: 'pl0',
-    },
-    {
-      id: 'v1',
-      votingID: 'vi3',
-      playerID: 'pl0',
-    },
-  ],
+  votes: [],
   votings: [],
   carCrashes: [],
   airCrashes: [],

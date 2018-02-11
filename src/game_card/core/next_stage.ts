@@ -40,19 +40,37 @@ export const nextStage = {
       },
       currentTimerValue: 60,
       isRunTimer: false
-    }
+    };
   },
   [StageType.DAY_SPEAKING]: (state: GameCardState): GameCardState => {
-    const nextSpeaker = getNextSpeaker(state.players, state.day, state.lastOpenedDaySpeakerID, state.stage.currentSpeakerID);
+    const { votings, day, players, lastOpenedDaySpeakerID, stage: { currentSpeakerID }} = state;
+    const nextSpeaker = getNextSpeaker(players, day, lastOpenedDaySpeakerID, currentSpeakerID);
+    const nextVoting = nextSpeaker ? undefined : votings.find(voting => voting.dayNumber === day);
     return {
       ...state,
       stage: {
         ...state.stage,
         type: nextSpeaker ? StageType.DAY_SPEAKING : StageType.VOTING,
         currentSpeakerID: nextSpeaker ? nextSpeaker.id : undefined,
+        currentVotingID: nextVoting ? nextVoting.id : undefined,
       },
       currentTimerValue: 60,
       isRunTimer: false
-    }
+    };
+  },
+  [StageType.VOTING]: (state: GameCardState): GameCardState => {
+    const { votings, day, stage: { currentVotingID }} = state;
+    const todayVotings = votings.filter(voting => voting.dayNumber === day);
+    const currentVotingIndex = todayVotings.findIndex(voting => voting.id === currentVotingID);
+    const nextVoting = currentVotingIndex > -1 ? todayVotings[currentVotingIndex + 1] : undefined;
+    // TODO: добавить автоматическое дополение голосами тех то не голосовал 
+    return {
+      ...state,
+      stage: {
+        ...state.stage,
+        type: nextVoting ? StageType.VOTING : StageType.AUTO_CRASH_VOTING,
+        currentVotingID: nextVoting ? nextVoting.id : undefined,
+      }
+    };
   },
 };
