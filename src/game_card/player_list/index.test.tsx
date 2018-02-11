@@ -143,6 +143,15 @@ describe('game_card/player_list', () => {
       expect(playerCardWrappers().at(1).props().disabled).toBe(false);
       expect(playerCardWrappers().at(2).props().disabled).toBe(false);
     });
-    // опциональный дизейблинг мертвых игроков
+    it('должен предоставлять опцию для дисейблинга всех игроков', () => {
+      const currentDay = 1;
+      const players = getPlayersByDayDeathNumbers([undefined, 3, 0]);
+
+      const { playerCardWrappers } = render({ players, currentDay, disableDeathPlayers: false, disable: true });
+
+      expect(playerCardWrappers().at(0).props().disabled).toBe(true);
+      expect(playerCardWrappers().at(1).props().disabled).toBe(true);
+      expect(playerCardWrappers().at(2).props().disabled).toBe(true);
+    });
   });
 });
