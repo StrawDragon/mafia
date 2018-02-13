@@ -22,6 +22,7 @@ const render = (overrideProps: Partial<Props> = {}) => {
     currentDay: 0,
     players: [],
     votes: [],
+    disabledPlayers: [],
     onToggleVote: () => ({}),
     onNext: () => ({}),
     eliminationPlayer: makePlayer({ nickname: 'eliminationPlayer' }),
@@ -91,11 +92,6 @@ describe('game_card / voting_screen', () => {
       expect(onToggleVote.mock.calls[0][1]).toBe(player1.id);
       expect(onToggleVote.mock.calls[0][0]).toBe(eliminationPlayer.id);
       expect(onToggleVote.mock.calls[1][1]).toBe(player2.id);
-    });
-    it('Должен давать возможность дисейблить список игроков', () => {
-      const { playerListWrapper } = render({ disablePlayerList: true });
-
-      expect(playerListWrapper().props().disable).toBe(true);
     });
 
     // Вынести makePlayer в utils, сделать рефакторинг для других тестов

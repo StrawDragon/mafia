@@ -59,16 +59,69 @@ export const nextStage = {
     };
   },
   [StageType.VOTING]: (state: GameCardState): GameCardState => {
-    const { votings, day, stage: { currentVotingID }} = state;
+    const { votings, day, stage: { currentVotingID }, votes, players} = state;
     const todayVotings = votings.filter(voting => voting.dayNumber === day);
     const currentVotingIndex = todayVotings.findIndex(voting => voting.id === currentVotingID);
     const nextVoting = currentVotingIndex > -1 ? todayVotings[currentVotingIndex + 1] : undefined;
-    // TODO: добавить автоматическое дополение голосами тех то не голосовал 
+    // TODO: добавить автоматическое дополение голосами тех то не голосовал
+    
+    // если это было последнее голосование
+    if (!nextVoting && currentVotingIndex > -1) {
+      const todayVotes = votes.filter(vote =>
+        todayVotings.find(voting => voting.id === vote.votingID)
+      );
+      
+      const todayVotesMap = {};
+      for (let i = 0; i < todayVotes.length; i++) {
+        if (todayVotes[i].votingID in todayVotesMap) {
+          todayVotesMap[todayVotes[i].votingID] = 0;
+        }
+
+        todayVotesMap[todayVotes[i].votingID] += 1;
+      }
+
+      const [, maxVoteCount] = Object.entries(todayVotesMap).reduce((acc, vote) => {
+        if (acc[1] < vote[1]) {
+          return vote;
+        }
+
+        return acc;
+      });
+
+      const suspectPlayers = Object.entries(todayVotesMap)
+        .filter(([votingID, voteCount]) => voteCount === maxVoteCount)
+        .map(([votingID, voteCount]) => {
+          const targetVoting = todayVotings.find(voting => voting.id === votingID);
+          return targetVoting ? targetVoting.playerID : undefined;
+        })
+        .filter(playerID => !!playerID);
+      const newPlayers = players.map(player => {
+        if (player.id === suspectPlayers[0]) {
+          return {
+            ...player,
+            dayDeathNumber: day,
+          };
+        }
+
+        return player;
+      });
+
+      return {
+        ...state,
+        players: newPlayers,
+        stage: {
+          ...state.stage,
+          type: suspectPlayers.length === 1 ? StageType.OUTCAST_PLAYER_SPEAKING : StageType.AUTO_CRASH_VOTING,
+          currentVotingID: nextVoting ? nextVoting.id : undefined,
+        }
+      };
+    }
+
     return {
       ...state,
       stage: {
         ...state.stage,
-        type: nextVoting ? StageType.VOTING : StageType.AUTO_CRASH_VOTING,
+        type: nextVoting ? StageType.VOTING : StageType.CITY_SLEEPING,
         currentVotingID: nextVoting ? nextVoting.id : undefined,
       }
     };

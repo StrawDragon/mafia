@@ -12,7 +12,7 @@ interface Props {
   stageTitle: string;
   nextDescription: string;
   currentShootingID: string;
-  shoots: Array<Shoot>,
+  shoots: Array<Shoot>;
   onNext: () => void;
 }
 

@@ -12,6 +12,7 @@ import { TimerScreen } from './timer_screen';
 import { CityAwekening } from './city_awekening';
 import { DaySpeaking } from './day_speaking/index';
 import { VotingScreen } from './voting_screen';
+import { CitySleeping } from './city_sleeping';
 
 interface Props {
   stageType: StageType;
@@ -55,8 +56,10 @@ class GameCard extends React.Component<Props> {
         return (<DaySpeaking />);
       case StageType.VOTING:
         return (<VotingScreen />);
+      case StageType.OUTCAST_PLAYER_SPEAKING:
+        return (<h1>{'OUTCAST_PLAYER_SPEAKING'}</h1>);
       case StageType.CITY_SLEEPING:
-        return (<h1>В разработке</h1>);
+        return (<CitySleeping />);
       default: return false;
     }
   }
