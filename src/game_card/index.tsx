@@ -13,6 +13,7 @@ import { CityAwekening } from './city_awekening';
 import { DaySpeaking } from './day_speaking/index';
 import { VotingScreen } from './voting_screen';
 import { CitySleeping } from './city_sleeping';
+import { MafiaDoingDirtyBusiness } from './mafia_doing_dirty_business';
 
 interface Props {
   stageType: StageType;
@@ -60,6 +61,8 @@ class GameCard extends React.Component<Props> {
         return (<h1>{'OUTCAST_PLAYER_SPEAKING'}</h1>);
       case StageType.CITY_SLEEPING:
         return (<CitySleeping />);
+      case StageType.MAFIA_DOING_DIRTY_BUSINESS:
+        return (<MafiaDoingDirtyBusiness />);
       default: return false;
     }
   }

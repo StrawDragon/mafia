@@ -126,4 +126,13 @@ export const nextStage = {
       }
     };
   },
+  [StageType.CITY_SLEEPING]: (state: GameCardState): GameCardState => {
+    return {
+      ...state,
+      stage: {
+        ...state.stage,
+        type: StageType.MAFIA_DOING_DIRTY_BUSINESS,
+      },
+    };
+  },
 };
