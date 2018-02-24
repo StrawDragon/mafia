@@ -6,7 +6,7 @@ const stub: GameCardState = {
   day: 0,
   lastOpenedDaySpeakerID: 'pl9',
   stage: {
-    type: StageType.CITY_AWAKENING,
+    type: StageType.CITY_SLEEPING,
     currentVotingID: undefined,
     currentShootingID: undefined,
     currentDonCheckingID: undefined,

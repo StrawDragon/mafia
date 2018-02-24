@@ -142,6 +142,33 @@ const voteToggledReducer = (state: GameCardState, action: ChargedAction<string>)
   }
 };
 
+const shootToggledReducer = (state: GameCardState, action: ChargedAction<{shooter: Player, player: Player, day: number}>): GameCardState => {
+  const { shoots } = state;
+  const {day, player, shooter} = action.payload;
+
+  const currentShoot = shoots.find(shoot => shoot.dayNumber === day && shoot.fromPlayerID === shooter.id && shoot.toPlayerID === player.id);
+
+  if (currentShoot) {
+    return {
+      ...state,
+      shoots: shoots.filter(shoot => shoot.dayNumber !== day || shoot !== currentShoot),
+    };
+  } else {
+    return {
+      ...state,
+      shoots: [
+        ...shoots.filter(shoot => shoot.dayNumber !== day || shoot.fromPlayerID !== shooter.id),
+        {
+          id: shortid.generate(),
+          fromPlayerID: shooter.id,
+          toPlayerID: player.id,
+          dayNumber: day,
+        }
+      ],
+    };
+  }
+};
+
 // tslint:disable-next-line:no-any
 const reducer = (state: GameCardState = initialState, action: Action<any>): GameCardState => {
   switch (action.type) {
@@ -155,6 +182,7 @@ const reducer = (state: GameCardState = initialState, action: Action<any>): Game
     case ActionTypes.GameCard.NEXT_REQUESTED: return nextRequestedReducer(state);
     case ActionTypes.GameCard.SUSPECT_TOGGLED: return suspectToggledReducer(state, action);
     case ActionTypes.GameCard.VOTE_TOGGLED: return voteToggledReducer(state, action);
+    case ActionTypes.GameCard.SHOOT_TOGGLED: return shootToggledReducer(state, action);
     default: return state;
   }
 };
