@@ -10,5 +10,6 @@ export default {
     NEXT_REQUESTED: 'GameCard -> NEXT_REQUESTED',
     SUSPECT_TOGGLED: 'GameCard -> SUSPECT_TOGGLED',
     VOTE_TOGGLED: 'GameCard -> VOTE_TOGGLED',
+    SHOOT_TOGGLED: 'GameCard -> SHOOT_ADDED',
   },
 };

@@ -2,6 +2,7 @@ import ActionTypes from '../common/constants/actionTypes';
 import { ChargedAction, SimpleAction } from '../common/types/action';
 import PlayerRole from './types/player_role';
 import Vote from './types/vote';
+import Player from './types/player';
 
 export const addVote = (vote: Vote): ChargedAction<Vote> => ({
   type: ActionTypes.GameCard.VOTE_ADDED,
@@ -48,4 +49,13 @@ export const toggleSuspect = (playerID: string, initiatorID: string): ChargedAct
 export const toggleVote = (playerID: string): ChargedAction<string> => ({
   type: ActionTypes.GameCard.VOTE_TOGGLED,
   payload: playerID,
+});
+
+export const toggleShoot = (fromPlayer: Player | undefined, toPlayer: Player, day: number): ChargedAction<{ fromPlayer: Player | undefined, toPlayer: Player, day: number }> => ({
+  type: ActionTypes.GameCard.SHOOT_TOGGLED,
+  payload: {
+    fromPlayer,
+    toPlayer,
+    day,
+  },
 });
