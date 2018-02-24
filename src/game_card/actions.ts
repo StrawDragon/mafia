@@ -55,3 +55,13 @@ export const toggleShoot = (shooter: Player, player: Player, day: number): Charg
   type: ActionTypes.GameCard.SHOOT_TOGGLED,
   payload: { shooter, player, day },
 });
+
+export const toggleDonCheck = (player: Player, day: number): ChargedAction<{player: Player, day: number}> => ({
+  type: ActionTypes.GameCard.DON_CHECK_TOGGLED,
+  payload: { player, day },
+});
+
+export const toggleSheriffCheck = (player: Player, day: number): ChargedAction<{player: Player, day: number}> => ({
+  type: ActionTypes.GameCard.SHERIFF_CHECK_TOGGLED,
+  payload: { player, day },
+});

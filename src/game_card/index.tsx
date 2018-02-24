@@ -14,6 +14,8 @@ import { DaySpeaking } from './day_speaking/index';
 import { VotingScreen } from './voting_screen';
 import { CitySleeping } from './city_sleeping';
 import { MafiaDoingDirtyBusiness } from './mafia_doing_dirty_business';
+import { DonLookingSheriff } from './don_looking_sheriff';
+import { SheriffLookingDon } from './sheriff_looking_don';
 
 interface Props {
   stageType: StageType;
@@ -63,6 +65,10 @@ class GameCard extends React.Component<Props> {
         return (<CitySleeping />);
       case StageType.MAFIA_DOING_DIRTY_BUSINESS:
         return (<MafiaDoingDirtyBusiness />);
+      case StageType.DON_LOOKING_SHERIFF:
+        return (<DonLookingSheriff />);
+      case StageType.SHERIFF_LOOKING_DON:
+        return (<SheriffLookingDon />);
       default: return false;
     }
   }

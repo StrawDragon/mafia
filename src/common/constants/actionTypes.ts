@@ -11,5 +11,7 @@ export default {
     SUSPECT_TOGGLED: 'GameCard -> SUSPECT_TOGGLED',
     VOTE_TOGGLED: 'GameCard -> VOTE_TOGGLED',
     SHOOT_TOGGLED: 'GameCard -> SHOOT_TOGGLED',
+    DON_CHECK_TOGGLED: 'GameCard -> DON_CHECK_TOGGLED',
+    SHERIFF_CHECK_TOGGLED: 'GameCard -> SHERIFF_CHECK_TOGGLED',
   },
 };

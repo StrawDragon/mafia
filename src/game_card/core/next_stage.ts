@@ -135,4 +135,31 @@ export const nextStage = {
       },
     };
   },
+  [StageType.MAFIA_DOING_DIRTY_BUSINESS]: (state: GameCardState): GameCardState => {
+    return {
+      ...state,
+      stage: {
+        ...state.stage,
+        type: StageType.DON_LOOKING_SHERIFF,
+      },
+    };
+  },
+  [StageType.DON_LOOKING_SHERIFF]: (state: GameCardState): GameCardState => {
+    return {
+      ...state,
+      stage: {
+        ...state.stage,
+        type: StageType.SHERIFF_LOOKING_DON,
+      },
+    };
+  },
+  [StageType.SHERIFF_LOOKING_DON]: (state: GameCardState): GameCardState => {
+    return {
+      ...state,
+      stage: {
+        ...state.stage,
+        type: StageType.CITY_AWAKENING,
+      },
+    };
+  },
 };

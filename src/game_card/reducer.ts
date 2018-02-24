@@ -151,7 +151,7 @@ const shootToggledReducer = (state: GameCardState, action: ChargedAction<{shoote
   if (currentShoot) {
     return {
       ...state,
-      shoots: shoots.filter(shoot => shoot.dayNumber !== day || shoot !== currentShoot),
+      shoots: shoots.filter(shoot => shoot !== currentShoot),
     };
   } else {
     return {
@@ -161,6 +161,58 @@ const shootToggledReducer = (state: GameCardState, action: ChargedAction<{shoote
         {
           id: shortid.generate(),
           fromPlayerID: shooter.id,
+          toPlayerID: player.id,
+          dayNumber: day,
+        }
+      ],
+    };
+  }
+};
+
+const donCheckToggledReducer = (state: GameCardState, action: ChargedAction<{player: Player, day: number}>): GameCardState => {
+  const { donChecks } = state;
+  const {day, player} = action.payload;
+
+  const currentCheck = donChecks.find(check => check.dayNumber === day && check.toPlayerID === player.id);
+
+  if (currentCheck) {
+    return {
+      ...state,
+      donChecks: donChecks.filter(check => check !== currentCheck),
+    };
+  } else {
+    return {
+      ...state,
+      donChecks: [
+        ...donChecks.filter(check => check.dayNumber !== day),
+        {
+          id: shortid.generate(),
+          toPlayerID: player.id,
+          dayNumber: day,
+        }
+      ],
+    };
+  }
+};
+
+const sheriffCheckToggledReducer = (state: GameCardState, action: ChargedAction<{player: Player, day: number}>): GameCardState => {
+  const { sheriffChecks } = state;
+  const {day, player} = action.payload;
+
+  const currentCheck = sheriffChecks.find(check => check.dayNumber === day && check.toPlayerID === player.id);
+
+  if (currentCheck) {
+    return {
+      ...state,
+      sheriffChecks: sheriffChecks.filter(check => check !== currentCheck),
+    };
+  } else {
+    return {
+      ...state,
+      sheriffChecks: [
+        ...sheriffChecks.filter(check => check.dayNumber !== day),
+        {
+          id: shortid.generate(),
           toPlayerID: player.id,
           dayNumber: day,
         }
@@ -183,6 +235,8 @@ const reducer = (state: GameCardState = initialState, action: Action<any>): Game
     case ActionTypes.GameCard.SUSPECT_TOGGLED: return suspectToggledReducer(state, action);
     case ActionTypes.GameCard.VOTE_TOGGLED: return voteToggledReducer(state, action);
     case ActionTypes.GameCard.SHOOT_TOGGLED: return shootToggledReducer(state, action);
+    case ActionTypes.GameCard.DON_CHECK_TOGGLED: return donCheckToggledReducer(state, action);
+    case ActionTypes.GameCard.SHERIFF_CHECK_TOGGLED: return sheriffCheckToggledReducer(state, action);
     default: return state;
   }
 };
