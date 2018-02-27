@@ -88,32 +88,49 @@ export const nextStage = {
         return acc;
       });
 
-      const suspectPlayers = Object.entries(todayVotesMap)
+      const suspectPlayerIDs = Object.entries(todayVotesMap)
         .filter(([votingID, voteCount]) => voteCount === maxVoteCount)
         .map(([votingID, voteCount]) => {
           const targetVoting = todayVotings.find(voting => voting.id === votingID);
           return targetVoting ? targetVoting.playerID : undefined;
         })
         .filter(playerID => !!playerID);
-      const newPlayers = players.map(player => {
-        if (player.id === suspectPlayers[0]) {
-          return {
-            ...player,
-            dayDeathNumber: day,
-          };
-        }
 
-        return player;
-      });
+      // если есть игрок выбывший из игра по голосованию
+      if (suspectPlayerIDs.length === 1) {
+        const newPlayers = players.map(player => {
+          if (player.id === suspectPlayerIDs[0]) {
+            return {
+              ...player,
+              dayDeathNumber: day,
+            };
+          }
+  
+          return player;
+        });
+
+        return {
+          ...state,
+          players: newPlayers,
+          stage: {
+            ...state.stage,
+            type: StageType.OUTCAST_PLAYER_SPEAKING,
+            currentVotingID: undefined,
+            currentSpeakerID: suspectPlayerIDs[0],
+          },
+          initialTimerValue: 30,
+          currentTimerValue: 30,
+          isRunTimer: false,
+        };
+      }
 
       return {
         ...state,
-        players: newPlayers,
         stage: {
           ...state.stage,
-          type: suspectPlayers.length === 1 ? StageType.OUTCAST_PLAYER_SPEAKING : StageType.AUTO_CRASH_VOTING,
-          currentVotingID: nextVoting ? nextVoting.id : undefined,
-        }
+          type: StageType.AUTO_CRASH_SPEAKING,
+          currentVotingID: undefined,
+        },
       };
     }
 
@@ -124,6 +141,32 @@ export const nextStage = {
         type: nextVoting ? StageType.VOTING : StageType.CITY_SLEEPING,
         currentVotingID: nextVoting ? nextVoting.id : undefined,
       }
+    };
+  },
+  [StageType.OUTCAST_PLAYER_SPEAKING]: (state: GameCardState) => {
+    const { day, players, stage: { currentSpeakerID } } = state;
+    const currentSpeakerIndex = players.findIndex(player => player.id === currentSpeakerID);
+    const nextOutcastPlayer = players.find((player, index) => index > currentSpeakerIndex && player.dayDeathNumber === day);
+
+    if (nextOutcastPlayer) {
+      return {
+        ...state,
+        stage: {
+          ...state.stage,
+          currentSpeakerID: nextOutcastPlayer.id,
+        },
+        initialTimerValue: 30,
+        currentTimerValue: 30,
+        isRunTimer: false,
+      };
+    }
+
+    return {
+      ...state,
+      stage: {
+        ...state.stage,
+        type: StageType.CITY_SLEEPING,
+      },
     };
   },
   [StageType.CITY_SLEEPING]: (state: GameCardState): GameCardState => {
